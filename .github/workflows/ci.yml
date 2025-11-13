@@ -33,3 +33,7 @@ jobs:
       - name: 📏 ESLint
         run: |
           npm run lint
+
+      - name: 🧪 Run JS unit tests
+        run: |
+          npm run test
