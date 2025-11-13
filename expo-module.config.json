@@ -1,0 +1,17 @@
+{
+  "platforms": ["apple", "android"],
+  "features": ["swiftui"],
+  "apple": {
+    "modules": [
+      "RNYouVersionPlatformModule",
+      "RNSignInWithYouVersionButtonModule",
+      "RNBibleTextViewModule",
+      "RNVotdViewModule",
+      "RNBibleReaderViewModule",
+      "RNBibleWidgetViewModule"
+    ]
+  },
+  "android": {
+    "modules": ["com.youversion.reactnativesdk.RNYouVersionPlatformModule"]
+  }
+}
