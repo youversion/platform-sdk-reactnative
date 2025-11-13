@@ -29,11 +29,15 @@
   "author": "YouVersion (https://github.com/youversion/yvp-react-native-sdk)",
   "license": "TODO",
   "homepage": "https://github.com/youversion/yvp-react-native-sdk#readme",
+  "jest": {
+    "preset": "expo-module-scripts"
+  },
   "dependencies": {},
   "devDependencies": {
+    "@types/invariant": "^2.2.37",
     "@types/react": "~19.1.0",
-    "expo-module-scripts": "^5.0.7",
     "expo": "^54.0.10",
+    "expo-module-scripts": "^5.0.7",
     "react-native": "0.81.4"
   },
   "peerDependencies": {
