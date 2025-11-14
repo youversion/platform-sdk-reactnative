@@ -1,6 +1,20 @@
 ![Platform React Native SDK](./assets/github-reactNative-sdk-banner.png)
 
+# YouVersion React Native SDK
+
+[![npm version](https://badge.fury.io/js/@youversion%2Freact-native-sdk.svg)](https://www.npmjs.com/package/@youversion/react-native-sdk)
+[![CI Status](https://github.com/youversion/platform-sdk-reactnative/workflows/CI/badge.svg)](https://github.com/youversion/platform-sdk-reactnative/actions)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 A lightweight React Native SDK for integrating YouVersion Platform features into React Native applications.
+
+## Documentation
+
+- [Installation & Usage](#installation)
+- [API Reference](#api)
+- [Contributing Guide](CONTRIBUTING.md)
+- [Release Process](RELEASING.md)
+- [Changelog](CHANGELOG.md)
 
 ## Installation
 

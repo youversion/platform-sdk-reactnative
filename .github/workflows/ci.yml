@@ -17,14 +17,22 @@ jobs:
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # LTS
-          cache: 'npm'
+          node-version: "20" # LTS
+          cache: "npm"
           cache-dependency-path: |
             package-lock.json
             **/package-lock.json
 
       - name: 📦 Install dependencies
         run: npm ci
+
+      - name: ✅ Validate commit messages
+        run: |
+          # Get the list of commits in this PR
+          git fetch origin ${{ github.base_ref }}
+
+          # Validate each commit message using commitlint
+          npx commitlint --from origin/${{ github.base_ref }} --to HEAD --verbose
 
       - name: 🛡️ Check types
         run: |
