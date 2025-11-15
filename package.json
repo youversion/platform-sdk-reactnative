@@ -42,7 +42,7 @@
     "react-native": "0.81.4"
   },
   "peerDependencies": {
-    "expo": "*",
+    "expo": ">=54.0.0",
     "react": "*",
     "react-native": "*"
   }
