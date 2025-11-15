@@ -2,8 +2,8 @@
 
 A lightweight React Native SDK for integrating YouVersion Platform features into React Native applications.
 
+> [!important]
 > The React Native SDK is currently **iOS-only**. Android support is under active development and not yet available for use.
-
 ## Installation
 
 **Prerequisites:**
