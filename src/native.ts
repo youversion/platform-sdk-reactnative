@@ -5,7 +5,7 @@ import {
   BibleVersion,
   HighlightResponse,
   LanguageOverview,
-  YouVersionLoginResult,
+  SignInWithYouVersionResult,
   YouVersionUserInfo,
   YouVersionVerseOfTheDay,
 } from "./types";
@@ -15,7 +15,7 @@ declare class RNYouVersionPlatformModule extends NativeModule {
 
   setApiHost(apiHost: string): void;
 
-  signIn(permissions: string[]): Promise<YouVersionLoginResult>;
+  signIn(permissions: string[]): Promise<SignInWithYouVersionResult>;
 
   signOut(): Promise<void>;
 

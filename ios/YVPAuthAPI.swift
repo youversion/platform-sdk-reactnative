@@ -23,7 +23,12 @@ struct YVPAuthAPI {
                 promise.resolve([
                     "accessToken": response.accessToken,
                     "permissions": response.permissions.map(\.rawValue),
-                    "yvpUserId": response.yvpUserId
+                    "yvpUserId": response.yvpUserId,
+                    "expiryDate": formatExpiryDate(response.expiryDate),
+                    "refreshToken": response.refreshToken,
+                    "name": response.name,
+                    "profilePicture": response.profilePicture,
+                    "email": response.email
                   ])
             } catch {
                 promise.reject(error)
@@ -53,6 +58,16 @@ struct YVPAuthAPI {
             }
         }
     }
+}
+
+private let isoFormatter: ISO8601DateFormatter = {
+    let f = ISO8601DateFormatter()
+    f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    return f
+}()
+
+func formatExpiryDate(_ expiryDate: Date?) -> String? {
+    expiryDate.map { isoFormatter.string(from: $0) }
 }
 
 

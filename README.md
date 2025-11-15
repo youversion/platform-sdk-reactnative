@@ -272,17 +272,8 @@ See `BibleReference` properties under the `BibleTextView` component section abov
 
 Presents the YouVersion login flow to the user and resolves with the login result on completion.
 
-```tsx
-import { YouVersionAPI } from '@youversion/platform-sdk-reactnative';
-
-const result = await YouVersionAPI.Users.signIn(['bibles', 'highlights']);
-```
-
 **Parameters:**
-An object with the following optional properties:
-
-- `requiredPermissions?: SignInWithYouVersionPermission[]` - Array of permissions that must be granted by the user for successful login.
-- `optionalPermissions?: SignInWithYouVersionPermission[]` - Array of permissions that are requested but not required for login.
+An array of permissions you're requesting from the user when they sign in.
 
 Enum values for `SignInWithYouVersionPermission`:
 
@@ -293,13 +284,18 @@ Enum values for `SignInWithYouVersionPermission`:
 - `bibleActivity`
 
 **Returns:**
-`Promise<YouVersionLoginResult>` - An object containing the following details:
+`Promise<SignInWithYouVersionResult>` - An object containing the following details:
 
-| Property      | Type                               | Description                                  |
-| ------------- | ---------------------------------- | -------------------------------------------- |
-| `accessToken` | `string`                           | The access token for the authenticated user. |
-| `permissions` | `SignInWithYouVersionPermission[]` | The permissions granted by the user.         |
-| `yvpUserId`   | `string`                           | The YouVersion Platform user ID.             |
+| Property         | Type                               | Description                                  |
+| ---------------- | ---------------------------------- | -------------------------------------------- |
+| `accessToken`    | `string`                           | Access token for the authenticated user.     |
+| `permissions`    | `SignInWithYouVersionPermission[]` | Permissions granted by the user.             |
+| `yvpUserId`      | `string`                           | YouVersion Platform user ID.                 |
+| `expiryDate`     | `string`                           | Expiration date of the access token.         |
+| `refreshToken`   | `string`                           | Refresh token for renewing the access token. |
+| `name`           | `string`                           | Name of the authenticated user.              |
+| `profilePicture` | `string`                           | URL to the user's profile picture.           |
+| `email`          | `string`                           | Email address of the authenticated user.     |
 
 #### `signOut`
 

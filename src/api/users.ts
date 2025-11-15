@@ -1,7 +1,7 @@
 import { Module } from "../native";
 import {
   SignInWithYouVersionPermission,
-  YouVersionLoginResult,
+  SignInWithYouVersionResult,
   YouVersionUserInfo,
 } from "../types";
 
@@ -10,11 +10,11 @@ export const UsersAPI = {
    * Presents the YouVersion login flow to the user and returns the login result upon completion.
    *
    * @param permissions - An array of permissions to request during sign-in.
-   * @returns A promise that resolves to the login result as a {@link YouVersionLoginResult} object.
+   * @returns A promise that resolves to the login result as a {@link SignInWithYouVersionResult} object.
    */
   signIn: (
     permissions: SignInWithYouVersionPermission[] = [],
-  ): Promise<YouVersionLoginResult> => {
+  ): Promise<SignInWithYouVersionResult> => {
     return Module.signIn(permissions);
   },
 

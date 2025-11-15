@@ -4,7 +4,7 @@ import {
   HighlightResponse,
   LanguageOverview,
   SignInWithYouVersionPermission,
-  YouVersionLoginResult,
+  SignInWithYouVersionResult,
   YouVersionUserInfo,
   YouVersionVerseOfTheDay,
 } from "../src";
@@ -18,7 +18,7 @@ export function getAccessToken(): string | null {
 export function signIn(
   requiredPermissions: SignInWithYouVersionPermission[] = [],
   optionalPermissions: SignInWithYouVersionPermission[] = [],
-): Promise<YouVersionLoginResult> {
+): Promise<SignInWithYouVersionResult> {
   return Promise.resolve({
     accessToken: "mock-access-token",
     permissions: [...requiredPermissions, ...optionalPermissions],
