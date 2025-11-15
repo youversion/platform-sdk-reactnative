@@ -4,16 +4,20 @@ A lightweight React Native SDK for integrating YouVersion Platform features into
 
 > [!important]
 > The React Native SDK is currently **iOS-only**. Android support is under active development and not yet available for use.
+
 ## Installation
 
 **Prerequisites:**
 
-For bare React Native projects, first follow the instructions to [set up Expo modules in a bare React Native project](https://docs.expo.dev/bare/installing-expo-modules/). You can skip this step if you are already using packages from Expo or using the Expo managed workflow.
+This project uses the underlying YouVersion SDKs for [Swift](https://github.com/youversion/platform-sdk-swift) and [Kotlin](https://github.com/youversion/platform-sdk-kotlin), with UI components written in SwiftUI and Jetpack Compose, respectively.
 
-This project uses the underlying YouVersion SDKs for [Swift](https://github.com/youversion/platform-sdk-swift) and [Kotlin](https://github.com/youversion/platform-sdk-kotlin). The UI components are written in SwiftUI and Jetpack Compose. Support for Jetpack Compose and SwiftUI is a new development in the React Native ecosystem. That said, this SDK requires recent versions of iOS, Expo and React Native to work.
+Because support for Jetpack Compose and SwiftUI is a recent development in the React Native ecosystem, this SDK requires recent versions of iOS, Expo, and React Native to work.
 
 > The minimum supported version of iOS is 17.
 > The minimum supported version of Expo is SDK 54.
+
+**Using bare React Native?**
+Follow these instructions to [set up Expo modules in a bare React Native project](https://docs.expo.dev/bare/installing-expo-modules/) before installing this package.
 
 **Install the package:**
 
