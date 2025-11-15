@@ -1,5 +1,6 @@
 {
   "branches": ["main"],
+  "tagFormat": "${version}",
   "repositoryUrl": "https://github.com/youversion/platform-sdk-reactnative",
   "plugins": [
     [
@@ -39,11 +40,19 @@
             { "type": "revert", "section": "Reverts" },
             { "type": "docs", "section": "Documentation", "hidden": false },
             { "type": "style", "section": "Styles", "hidden": true },
-            { "type": "chore", "section": "Miscellaneous Chores", "hidden": true },
+            {
+              "type": "chore",
+              "section": "Miscellaneous Chores",
+              "hidden": true
+            },
             { "type": "refactor", "section": "Code Refactoring" },
             { "type": "test", "section": "Tests", "hidden": true },
             { "type": "build", "section": "Build System", "hidden": true },
-            { "type": "ci", "section": "Continuous Integration", "hidden": true }
+            {
+              "type": "ci",
+              "section": "Continuous Integration",
+              "hidden": true
+            }
           ]
         }
       }
