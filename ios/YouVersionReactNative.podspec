@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     :tvos => '17.0'
   }
   s.swift_version  = '5.9'
-  s.source         = { git: 'https://github.com/youversion/yvp-react-native-sdk' }
+  s.source         = { git: 'https://github.com/youversion/platform-sdk-reactnative' }
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
