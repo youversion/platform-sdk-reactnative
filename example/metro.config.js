@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  '@youversion/react-native-sdk': '..',
+  '@youversion/platform-sdk-reactnative': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

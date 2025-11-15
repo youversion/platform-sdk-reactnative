@@ -1,4 +1,4 @@
-import { BibleWidgetView } from "@youversion/react-native-sdk";
+import { BibleWidgetView } from "@youversion/platform-sdk-reactnative";
 import { StyleSheet, View } from "react-native";
 
 export function WidgetScreen() {

@@ -1,4 +1,4 @@
-import { BibleReaderView } from "@youversion/react-native-sdk";
+import { BibleReaderView } from "@youversion/platform-sdk-reactnative";
 
 export function ReaderScreen() {
   return (
