@@ -7,19 +7,19 @@ A lightweight React Native SDK for integrating YouVersion Platform features into
 Using npm:
 
 ```sh
-npm install @youversion/react-native-sdk
+npm install @youversion/platform-sdk-reactnative
 ```
 
 Using Yarn:
 
 ```sh
-yarn add @youversion/react-native-sdk
+yarn add @youversion/platform-sdk-reactnative
 ```
 
 Using pnpm:
 
 ```sh
-pnpm add @youversion/react-native-sdk
+pnpm add @youversion/platform-sdk-reactnative
 ```
 
 iOS (bare/Expo prebuilt):
@@ -31,7 +31,7 @@ npx pod-install
 Expo managed workflow (requires a development build or prebuild):
 
 ```sh
-npx expo install @youversion/react-native-sdk
+npx expo install @youversion/platform-sdk-reactnative
 npx expo prebuild
 ```
 
@@ -46,7 +46,7 @@ Configure the SDK with you app key once, typically in your app's entry point.
 ```typescript
 // App.tsx
 import React, { useEffect } from 'react';
-import { YouVersionPlatform } from '@youversion/react-native-sdk';
+import { YouVersionPlatform } from '@youversion/platform-sdk-reactnative';
 
 export default function App() {
   useEffect(() => {
@@ -136,7 +136,7 @@ Retrieves the verse of the day passage id for a specified day of the year
 A branded button view show the user to sign in with YouVersion. Provide an `onPress` handler to initiate the sign-in flow.
 
 ```tsx
-import { SignInWithYouVersionButton } from '@youversion/react-native-sdk';
+import { SignInWithYouVersionButton } from '@youversion/platform-sdk-reactnative';
 
 <SignInWithYouVersionButton
   isStroked
@@ -161,7 +161,7 @@ supports displaying an entire chapter, a specific verse or a range of verses. It
 an `onPress` handler when the user taps a verse.
 
 ```tsx
-import { BibleTextView } from '@youversion/react-native-sdk';
+import { BibleTextView } from '@youversion/platform-sdk-reactnative';
 
 <BibleTextView
   bibleReference={{
@@ -243,7 +243,7 @@ type BibleReferenceChapter = {
 A view for displaying the verse of the day (VOTD) with Bible reference and text. It can be configured to fetch the VOTD from YouVersion, or passed a custom verse of the day object.
 
 ```tsx
-import { VotdView } from '@youversion/react-native-sdk';
+import { VotdView } from '@youversion/platform-sdk-reactnative';
 
 <VotdView
   colorScheme="dark"
@@ -272,7 +272,7 @@ See `YouVersionVerseOfTheDay` properties under the `verseOfTheDay` API section a
 A full-featured Bible reader component that supports font customizations, version switching, offline downloads, verse highlights and more. It is designed to provide a similar experience to the YouVersion Bible reader found in the YouVersion app. It accepts an optional initial Bible reference to display.
 
 ```tsx
-import { BibleReaderView } from '@youversion/react-native-sdk';
+import { BibleReaderView } from '@youversion/platform-sdk-reactnative';
 
 <BibleReaderView
   appName="YouVersion RN SDK"
@@ -293,7 +293,7 @@ See `BibleReference` properties under the `BibleTextView` component section abov
 A more opinionated view for displaying a Bible passage. It also displays the book, chapter and version name above the passage. Below the passage text, it displays copyright information and the YouVersion logo.
 
 ```tsx
-import { BibleWidgetView } from '@youversion/react-native-sdk';
+import { BibleWidgetView } from '@youversion/platform-sdk-reactnative';
 
 <BibleWidgetView
   reference={{

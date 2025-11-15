@@ -1,5 +1,5 @@
 {
-  "name": "@youversion/react-native-sdk",
+  "name": "@youversion/platform-sdk-reactnative",
   "version": "0.1.0",
   "description": "React Native SDK for YouVersion Platform",
   "main": "build/index.js",
@@ -19,16 +19,17 @@
   "keywords": [
     "react-native",
     "expo",
-    "@youversion/react-native-sdk",
-    "YouVersionReactNative"
+    "@youversion/platform-sdk-reactnative",
+    "Bible",
+    "YouVersion"
   ],
-  "repository": "https://github.com/youversion/yvp-react-native-sdk",
+  "repository": "https://github.com/youversion/platform-sdk-reactnative",
   "bugs": {
-    "url": "https://github.com/youversion/yvp-react-native-sdk/issues"
+    "url": "https://github.com/youversion/platform-sdk-reactnative/issues"
   },
-  "author": "YouVersion (https://github.com/youversion/yvp-react-native-sdk)",
-  "license": "TODO",
-  "homepage": "https://github.com/youversion/yvp-react-native-sdk#readme",
+  "author": "YouVersion (https://github.com/youversion)",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/youversion/platform-sdk-reactnative#readme",
   "jest": {
     "preset": "expo-module-scripts"
   },

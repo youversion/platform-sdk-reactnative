@@ -3,7 +3,7 @@ import {
   YouVersionAPI,
   YouVersionPlatform,
   YouVersionUserInfo,
-} from "@youversion/react-native-sdk";
+} from "@youversion/platform-sdk-reactnative";
 import { useEffect, useLayoutEffect, useState } from "react";
 import {
   ActivityIndicator,
