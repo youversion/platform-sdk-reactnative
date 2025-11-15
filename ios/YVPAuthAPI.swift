@@ -15,11 +15,6 @@ struct YVPAuthAPI {
                     contextProvider: ContextProvider()
                 )
 
-                if let msg = response.errorMsg, !msg.isEmpty {
-                    promise.reject(YVPError.signInError(message: msg))
-                    return
-                }
-            
                 promise.resolve([
                     "accessToken": response.accessToken,
                     "permissions": response.permissions.map(\.rawValue),
@@ -79,8 +74,4 @@ class ContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding
         }
         return window
     }
-}
-
-enum YVPError : Error {
-    case signInError(message: String)
 }
