@@ -15,10 +15,7 @@ declare class RNYouVersionPlatformModule extends NativeModule {
 
   setApiHost(apiHost: string): void;
 
-  signIn(
-    requiredPermissions: string[],
-    optionalPermissions: string[],
-  ): Promise<YouVersionLoginResult>;
+  signIn(permissions: string[]): Promise<YouVersionLoginResult>;
 
   signOut(): Promise<void>;
 

@@ -41,10 +41,7 @@ export function ProfileScreen() {
 
   async function handleSignIn() {
     try {
-      await YouVersionAPI.Users.signIn({
-        requiredPermissions: ["bibles"],
-        optionalPermissions: ["highlights"],
-      });
+      await YouVersionAPI.Users.signIn(["bibles"]);
 
       const userInfo = await YouVersionAPI.Users.userInfo();
       setCurrentUser(userInfo);

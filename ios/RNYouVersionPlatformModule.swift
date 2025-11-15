@@ -17,13 +17,11 @@ public class RNYouVersionPlatformModule: Module {
         }
 
         AsyncFunction("signIn") { (
-            requiredPermissions: [String],
-            optionalPermissions: [String],
+            permissions: [String],
             promise: Promise
         ) in
             YVPAuthAPI.signIn(
-                requiredPermissions: requiredPermissions,
-                optionalPermissions: optionalPermissions,
+                permissions: permissions,
                 promise: promise
             )
         }

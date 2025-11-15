@@ -3,20 +3,16 @@ import YouVersionPlatform
 import AuthenticationServices
 
 struct YVPAuthAPI {
-    static func signIn(requiredPermissions: [String], optionalPermissions: [String], promise: Promise) {
-        let required: Set<SignInWithYouVersionPermission> = Set(
-          requiredPermissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
-        )
-        let optional: Set<SignInWithYouVersionPermission> = Set(
-          optionalPermissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
-        )
+    static func signIn(permissions: [String], promise: Promise) {
+        let permissionsSet = Set<SignInWithYouVersionPermission>(
+            permissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
+          )
         
         Task {
             do {
                 let response = try await YouVersionAPI.Users.signIn(
-                  requiredPermissions: required,
-                  optionalPermissions: optional,
-                  contextProvider: ContextProvider()
+                    permissions: permissionsSet,
+                    contextProvider: ContextProvider()
                 )
 
                 if let msg = response.errorMsg, !msg.isEmpty {
