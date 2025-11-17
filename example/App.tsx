@@ -12,6 +12,7 @@ const Tabs = createNativeBottomTabNavigator();
 
 export default function App() {
   useEffect(() => {
+    // Get an app key at https://platform.youversion.com/
     YouVersionPlatform.configure("");
   }, []);
 
