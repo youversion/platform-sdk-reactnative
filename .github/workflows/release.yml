@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    # Allow manual trigger for emergency releases
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to create releases and push commits
+      issues: write # to comment on released issues
+      pull-requests: write # to comment on released PRs
+      id-token: write # for npm provenance
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for semantic-release
+          persist-credentials: false
+
+      - name: 🟢 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # LTS
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🛡️ Validate before release
+        run: |
+          echo "Running pre-release validation..."
+          npm run typecheck
+          npm run lint
+          npm run test
+          npm run build
+
+      - name: 🚀 Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Configure git for commits by semantic-release
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Configure git to use GITHUB_TOKEN for pushing
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
+          # Run semantic-release
+          npx semantic-release
+
+      - name: 📊 Release Summary
+        if: success()
+        run: |
+          echo "✅ Release process completed successfully"
+          echo "Check the releases page: https://github.com/${{ github.repository }}/releases"
+          echo "Check npm: https://www.npmjs.com/package/@youversion/react-native-sdk"

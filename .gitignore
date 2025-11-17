@@ -55,3 +55,11 @@ yarn-error.log
 
 # Expo
 .expo/*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Release artifacts
+dist/
+*.tgz
