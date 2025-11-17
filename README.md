@@ -1,8 +1,7 @@
 ![Platform React Native SDK](./assets/github-reactNative-sdk-banner.png)
 
 # YouVersion React Native SDK
-
-[![npm version](https://badge.fury.io/js/@youversion%2Freact-native-sdk.svg)](https://www.npmjs.com/package/@youversion/react-native-sdk)
+[![npm version](https://badge.fury.io/js/@youversion%2Freact-native-sdk.svg)](https://www.npmjs.com/package/@youversion/platform-sdk-reactnative)
 [![CI Status](https://github.com/youversion/platform-sdk-reactnative/workflows/CI/badge.svg)](https://github.com/youversion/platform-sdk-reactnative/actions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
