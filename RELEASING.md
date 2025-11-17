@@ -357,7 +357,7 @@ Semantic-release can be configured to publish pre-releases from specific branche
 
 3. **Users install with**:
    ```bash
-   npm install @youversion/react-native-sdk@beta
+   npm install @youversion/platform-sdk-reactnative@beta
    ```
 
 ## Troubleshooting
