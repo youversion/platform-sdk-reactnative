@@ -25,13 +25,13 @@
     "Bible",
     "YouVersion"
   ],
-  "repository": "https://github.com/youversion/platform-sdk-reactnative",
+  "repository": "git@github.com:youversion/platform-sdk-reactnative.git",
   "bugs": {
     "url": "https://github.com/youversion/platform-sdk-reactnative/issues"
   },
-  "author": "YouVersion (https://github.com/youversion/yvp-react-native-sdk)",
+  "author": "YouVersion (https://github.com/youversion/platform-sdk-reactnative)",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/youversion/yvp-react-native-sdk#readme",
+  "homepage": "https://github.com/youversion/platform-sdk-reactnative#readme",
   "jest": {
     "preset": "expo-module-scripts"
   },
