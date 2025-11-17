@@ -1,6 +1,6 @@
 import { createNativeBottomTabNavigator } from "@react-navigation/bottom-tabs/unstable";
 import { NavigationContainer } from "@react-navigation/native";
-import { YouVersionPlatform } from "@youversion/react-native-sdk";
+import { YouVersionPlatform } from "@youversion/platform-sdk-reactnative";
 import { useEffect } from "react";
 
 import { ProfileScreen } from "./src/screens/ProfileScreen";

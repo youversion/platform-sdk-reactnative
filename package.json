@@ -21,12 +21,13 @@
   "keywords": [
     "react-native",
     "expo",
-    "@youversion/react-native-sdk",
-    "YouVersionReactNative"
+    "@youversion/platform-sdk-reactnative",
+    "Bible",
+    "YouVersion"
   ],
-  "repository": "https://github.com/youversion/yvp-react-native-sdk",
+  "repository": "https://github.com/youversion/platform-sdk-reactnative",
   "bugs": {
-    "url": "https://github.com/youversion/yvp-react-native-sdk/issues"
+    "url": "https://github.com/youversion/platform-sdk-reactnative/issues"
   },
   "author": "YouVersion (https://github.com/youversion/yvp-react-native-sdk)",
   "license": "Apache-2.0",
@@ -50,7 +51,7 @@
     "semantic-release": "^24.2.0"
   },
   "peerDependencies": {
-    "expo": "*",
+    "expo": ">=54.0.0",
     "react": "*",
     "react-native": "*"
   }

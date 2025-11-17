@@ -3,8 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@youversion/react-native-sdk": ["../src/index"],
-      "@youversion/react-native-sdk/*": ["../src/*"]
+      "@youversion/platform-sdk-reactnative": ["../src/index"],
+      "@youversion/platform-sdk-reactnative/*": ["../src/*"]
     }
   }
 }

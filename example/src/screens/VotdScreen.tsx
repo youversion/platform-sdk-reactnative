@@ -1,4 +1,4 @@
-import { VotdView } from "@youversion/react-native-sdk";
+import { VotdView } from "@youversion/platform-sdk-reactnative";
 import { StyleSheet, View } from "react-native";
 
 export function VotdScreen() {

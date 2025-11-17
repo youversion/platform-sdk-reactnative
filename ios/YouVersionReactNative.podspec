@@ -15,14 +15,14 @@ Pod::Spec.new do |s|
     :tvos => '17.0'
   }
   s.swift_version  = '5.9'
-  s.source         = { git: 'https://github.com/youversion/yvp-react-native-sdk' }
+  s.source         = { git: 'https://github.com/youversion/platform-sdk-reactnative' }
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'YouVersionPlatform'
-  s.dependency 'YouVersionPlatformCore'
-  s.dependency 'YouVersionPlatformUI'
-  s.dependency 'YouVersionPlatformReader'
+  s.dependency 'YouVersionPlatform', '0.1.0'
+  s.dependency 'YouVersionPlatformCore', '0.1.0'
+  s.dependency 'YouVersionPlatformUI', '0.1.0'
+  s.dependency 'YouVersionPlatformReader', '0.1.0'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
