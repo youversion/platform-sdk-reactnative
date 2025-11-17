@@ -9,7 +9,7 @@
     "clean": "expo-module clean",
     "lint": "expo-module lint",
     "test": "expo-module test",
-    "prepare": "expo-module prepare && rm .eslintrc.js && husky",
+    "prepare": "expo-module prepare && rm .eslintrc.js && husky > /dev/null 2>&1 || true",
     "prepublishOnly": "expo-module prepublishOnly",
     "typecheck": "npx tsc --noEmit",
     "expo-module": "expo-module",
