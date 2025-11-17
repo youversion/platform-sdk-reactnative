@@ -280,7 +280,7 @@ const content = await getBibleContent('GEN.1.1');
 
 1. **Deprecate the bad version on npm** (doesn't remove it):
    ```bash
-   npm deprecate @youversion/react-native-sdk@0.6.0 "This version has critical bugs. Please upgrade to 0.6.1."
+   npm deprecate @youversion/platform-sdk-reactnative@0.6.0 "This version has critical bugs. Please upgrade to 0.6.1."
    ```
 
 2. **Publish a patch version** with fixes:
