@@ -3,31 +3,27 @@ import YouVersionPlatform
 import AuthenticationServices
 
 struct YVPAuthAPI {
-    static func signIn(requiredPermissions: [String], optionalPermissions: [String], promise: Promise) {
-        let required: Set<SignInWithYouVersionPermission> = Set(
-          requiredPermissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
-        )
-        let optional: Set<SignInWithYouVersionPermission> = Set(
-          optionalPermissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
-        )
+    static func signIn(permissions: [String], promise: Promise) {
+        let permissionsSet = Set<SignInWithYouVersionPermission>(
+            permissions.compactMap(SignInWithYouVersionPermission.init(rawValue:))
+          )
         
         Task {
             do {
                 let response = try await YouVersionAPI.Users.signIn(
-                  requiredPermissions: required,
-                  optionalPermissions: optional,
-                  contextProvider: ContextProvider()
+                    permissions: permissionsSet,
+                    contextProvider: ContextProvider()
                 )
 
-                if let msg = response.errorMsg, !msg.isEmpty {
-                    promise.reject(YVPError.signInError(message: msg))
-                    return
-                }
-            
                 promise.resolve([
                     "accessToken": response.accessToken,
                     "permissions": response.permissions.map(\.rawValue),
-                    "yvpUserId": response.yvpUserId
+                    "yvpUserId": response.yvpUserId,
+                    "expiryDate": formatExpiryDate(response.expiryDate),
+                    "refreshToken": response.refreshToken,
+                    "name": response.name,
+                    "profilePicture": response.profilePicture,
+                    "email": response.email
                   ])
             } catch {
                 promise.reject(error)
@@ -59,6 +55,16 @@ struct YVPAuthAPI {
     }
 }
 
+private let isoFormatter: ISO8601DateFormatter = {
+    let f = ISO8601DateFormatter()
+    f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    return f
+}()
+
+func formatExpiryDate(_ expiryDate: Date?) -> String? {
+    expiryDate.map { isoFormatter.string(from: $0) }
+}
+
 
 class ContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
@@ -68,8 +74,4 @@ class ContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding
         }
         return window
     }
-}
-
-enum YVPError : Error {
-    case signInError(message: String)
 }

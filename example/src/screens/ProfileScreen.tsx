@@ -41,16 +41,20 @@ export function ProfileScreen() {
 
   async function handleSignIn() {
     try {
-      await YouVersionAPI.Users.signIn({
-        requiredPermissions: ["bibles"],
-        optionalPermissions: ["highlights"],
-      });
-
-      const userInfo = await YouVersionAPI.Users.userInfo();
-      setCurrentUser(userInfo);
+      const signInResult = await YouVersionAPI.Users.signIn(["bibles"]);
+      console.log("Sign-in result:", signInResult);
     } catch (error) {
       Alert.alert("Error signing in");
       console.error("Error signing in:", error);
+      return;
+    }
+
+    try {
+      const userInfo = await YouVersionAPI.Users.userInfo();
+      setCurrentUser(userInfo);
+    } catch (error) {
+      Alert.alert("Error getting user info after sign-in");
+      console.error("Error getting user info:", error);
     }
   }
 

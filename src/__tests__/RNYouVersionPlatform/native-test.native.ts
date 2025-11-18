@@ -31,22 +31,18 @@ describe("YouVersionPlatform", () => {
 
 describe("YouVersionAPI.Users", () => {
   describe("#signIn", () => {
-    it("passes the required and optional permissions", async () => {
-      const result = await YouVersionAPI.Users.signIn({
-        requiredPermissions: ["bible_activity"],
-        optionalPermissions: ["demographics"],
-      });
+    it("passes the provided permissions", async () => {
+      const result = await YouVersionAPI.Users.signIn(["bible_activity"]);
 
-      expect(Module.signIn).toHaveBeenCalledWith(
-        ["bible_activity"],
-        ["demographics"],
+      expect(Module.signIn).toHaveBeenCalledWith(["bible_activity"]);
+
+      expect(result).toEqual(
+        expect.objectContaining({
+          accessToken: "mock-access-token",
+          permissions: ["bible_activity"],
+          yvpUserId: "mock-yvp-user-id",
+        }),
       );
-
-      expect(result).toEqual({
-        accessToken: "mock-access-token",
-        permissions: ["bible_activity", "demographics"],
-        yvpUserId: "mock-yvp-user-id",
-      });
     });
   });
 

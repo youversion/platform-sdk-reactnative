@@ -1,9 +1,14 @@
 import { ColorValue } from "react-native";
 
-export type YouVersionLoginResult = {
-  accessToken: string;
+export type SignInWithYouVersionResult = {
+  accessToken?: string;
   permissions: SignInWithYouVersionPermission[];
-  yvpUserId: string;
+  yvpUserId?: string;
+  expiryDate?: string;
+  refreshToken?: string;
+  name?: string;
+  profilePicture?: string;
+  email?: string;
 };
 
 export type SignInWithYouVersionPermission =
