@@ -1,7 +1,7 @@
 {
   "branches": ["main"],
   "tagFormat": "${version}",
-  "repositoryUrl": "https://github.com/youversion/platform-sdk-reactnative",
+  "repositoryUrl": "git@github.com:youversion/platform-sdk-reactnative.git",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
