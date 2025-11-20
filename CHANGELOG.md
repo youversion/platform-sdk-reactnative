@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.0 (2025-11-20)
+
+* feat(docs): update example app language for publishing release (#21) ([2abf72d](https://github.com/youversion/platform-sdk-reactnative/commit/2abf72d)), closes [#21](https://github.com/youversion/platform-sdk-reactnative/issues/21)
+* chore: Update to use new `signIn` function (#6) ([136578f](https://github.com/youversion/platform-sdk-reactnative/commit/136578f)), closes [#6](https://github.com/youversion/platform-sdk-reactnative/issues/6)
+
 ## 0.6.0 (2025-11-18)
 
 * fix(ci): change releaserc url to ssh to use deploy keys (#18) ([08ea4fb](https://github.com/youversion/platform-sdk-reactnative/commit/08ea4fb)), closes [#18](https://github.com/youversion/platform-sdk-reactnative/issues/18)
