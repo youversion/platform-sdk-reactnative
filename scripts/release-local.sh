@@ -123,7 +123,7 @@ EOF
 run_release() {
     print_step "Running semantic-release..."
 
-    npx semantic-release --extends ./.releaserc.local.json
+    npx semantic-release --extends ./.releaserc.local.json --no-ci
 
     print_success "Release completed - package published to npm!"
 }
