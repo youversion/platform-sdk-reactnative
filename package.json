@@ -1,5 +1,5 @@
 {
-  "name": "@youversion/react-native-sdk",
+  "name": "@youversion/platform-sdk-reactnative",
   "version": "0.7.0",
   "description": "React Native SDK for YouVersion Platform",
   "main": "build/index.js",
