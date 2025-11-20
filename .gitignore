@@ -53,6 +53,13 @@ npm-debug.log
 yarn-debug.log
 yarn-error.log
 
+# Environment variables
+.env
+.env.local
+
+# Local release configuration
+.releaserc.local.json
+
 # Expo
 .expo/*
 
