@@ -13,7 +13,6 @@ A lightweight React Native SDK for integrating YouVersion Platform features into
 - [Installation & Usage](#installation)
 - [API Reference](#api)
 - [Contributing Guide](CONTRIBUTING.md)
-- [Release Process](RELEASING.md)
 - [Changelog](CHANGELOG.md)
 
 > [!important]
