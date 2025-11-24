@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.7.2 (2025-11-24)</small>
+
+* fix(release): update package name to align to SDK naming (#24) ([9d4a1d7](https://github.com/youversion/platform-sdk-reactnative/commit/9d4a1d7)), closes [#24](https://github.com/youversion/platform-sdk-reactnative/issues/24)
+* ci(release): simplify manual release steps, align to ci (#20) ([b6ddda6](https://github.com/youversion/platform-sdk-reactnative/commit/b6ddda6)), closes [#20](https://github.com/youversion/platform-sdk-reactnative/issues/20)
+
 ## <small>0.7.1 (2025-11-20)</small>
 
 * fix(release): aligning package name to standard (#22) ([e096edb](https://github.com/youversion/platform-sdk-reactnative/commit/e096edb)), closes [#22](https://github.com/youversion/platform-sdk-reactnative/issues/22)
