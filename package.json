@@ -1,5 +1,5 @@
 {
-  "name": "@youversion/platform-sdk-reactnative",
+  "name": "@youversion/platform-react-native",
   "version": "0.7.1",
   "description": "React Native SDK for YouVersion Platform",
   "main": "build/index.js",
@@ -21,7 +21,7 @@
   "keywords": [
     "react-native",
     "expo",
-    "@youversion/platform-sdk-reactnative",
+    "@youversion/platform-react-native",
     "Bible",
     "YouVersion"
   ],
