@@ -1,7 +1,7 @@
 import { NativeModule, requireNativeModule } from "expo";
 
 import {
-  BibleReference,
+  BibleReferenceBase,
   BibleVersion,
   HighlightResponse,
   LanguageOverview,
@@ -48,7 +48,7 @@ declare class RNYouVersionPlatformModule extends NativeModule {
 
   version(versionId: number): Promise<BibleVersion>;
 
-  chapter(bibleReference: BibleReference): Promise<string>;
+  chapter(bibleReference: BibleReferenceBase): Promise<string>;
 
   getAccessToken(): string | null;
 }
