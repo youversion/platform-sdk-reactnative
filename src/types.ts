@@ -352,11 +352,25 @@ export interface BibleBook {
    * @example "Genesis"
    */
   title?: string;
-  titleLong?: string;
+
+  /**
+   * Indicates if this is Old Testament, New Testament, or Deuterocanonical
+   *
+   * @example "ot"
+   */
+  canon?: "nt" | "ot" | "dc";
+
   chapters?: BibleChapter[];
 }
 
 export interface BibleChapter {
+  /**
+   * Chapter identifier based off the USFM reference
+   *
+   * @example 1
+   */
+  id?: string;
+
   /**
    * Book identifier
    *
