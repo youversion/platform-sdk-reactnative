@@ -12,6 +12,9 @@
     ]
   },
   "android": {
-    "modules": ["com.youversion.reactnativesdk.RNYouVersionPlatformModule"]
+    "modules": [
+      "com.youversion.reactnativesdk.RNYouVersionPlatformModule",
+      "com.youversion.reactnativesdk.RNSignInWithYouVersionButtonModule"
+    ]
   }
 }
