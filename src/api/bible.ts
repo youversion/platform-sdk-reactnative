@@ -1,5 +1,5 @@
 import { Module } from "../native";
-import { BibleReference, BibleVersion } from "../types";
+import { BibleReferenceBase, BibleVersion } from "../types";
 
 export const BibleAPI = {
   /**
@@ -26,10 +26,10 @@ export const BibleAPI = {
   /**
    * Retrieves the content of a single Bible chapter from the server as an HTML string.
    *
-   * @param bibleReference - A {@link BibleReference} object specifying the reference to retrieve.
+   * @param bibleReference - A {@link BibleReferenceBase} object specifying the reference to retrieve.
    * @returns The chapter content as an HTML string.
    */
-  getChapter(bibleReference: BibleReference): Promise<string> {
+  getChapter(bibleReference: BibleReferenceBase): Promise<string> {
     return Module.chapter(bibleReference);
   },
 };

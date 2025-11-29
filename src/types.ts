@@ -90,7 +90,7 @@ export interface BibleTextOptions {
 
 export type BibleTextFootnoteMode = "none" | "inline" | "marker";
 
-interface BibleReferenceBase {
+export interface BibleReferenceBase {
   /** The ID of the Bible version */
   versionId: number;
 
