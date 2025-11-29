@@ -3,7 +3,7 @@ import { BibleReferenceBase, BibleVersion } from "../types";
 
 export const BibleAPI = {
   /**
-   * Retrieves a list of Bible versions available for a specified language code (like "en").
+   * Retrieves a list of Bible versions available for a specified language tag (like "eng").
    *
    * @param languageTag - An optional language code per BCP 47 for filtering available Bible versions. If `nil`
    *     the function returns versions for all languages.
