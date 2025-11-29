@@ -1,6 +1,6 @@
 {
   "platforms": ["apple", "android"],
-  "features": ["swiftui"],
+  "coreFeatures": ["swiftui", "compose"],
   "apple": {
     "modules": [
       "RNYouVersionPlatformModule",
