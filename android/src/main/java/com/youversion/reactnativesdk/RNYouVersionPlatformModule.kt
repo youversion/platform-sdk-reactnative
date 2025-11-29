@@ -17,5 +17,13 @@ class RNYouVersionPlatformModule : Module() {
                 appKey = appKey,
             )
         }
+
+        Function("setApiHost") { apiHost: String ->
+            YouVersionPlatformConfiguration.setApiHost(apiHost)
+        }
+        
+        Function("getAccessToken") {
+            YouVersionPlatformConfiguration.accessToken
+        }
     }
 }
