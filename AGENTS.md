@@ -34,10 +34,9 @@ When conducting code reviews, AI agents should systematically evaluate the follo
 
 #### React Native
 - Are components properly optimized using React.memo, useMemo, and useCallback where appropriate?
-- Is the bridge communication between native and JavaScript minimized?
+- Is the SDK using the appropriate React Native APIs for the target architecture version?
 - Are platform-specific code paths properly handled?
 - Are native modules properly linked and configured?
-- Is proper error boundary implementation in place?
 
 #### Kotlin (Android)
 - Does the code follow Kotlin idioms and best practices?
