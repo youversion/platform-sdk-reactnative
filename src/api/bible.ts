@@ -1,9 +1,9 @@
 import { Module } from "../native";
-import { BibleReference, BibleVersion } from "../types";
+import { BibleReferenceBase, BibleVersion } from "../types";
 
 export const BibleAPI = {
   /**
-   * Retrieves a list of Bible versions available for a specified language code (like "en").
+   * Retrieves a list of Bible versions available for a specified language tag (like "eng").
    *
    * @param languageTag - An optional language code per BCP 47 for filtering available Bible versions. If `nil`
    *     the function returns versions for all languages.
@@ -26,10 +26,10 @@ export const BibleAPI = {
   /**
    * Retrieves the content of a single Bible chapter from the server as an HTML string.
    *
-   * @param bibleReference - A {@link BibleReference} object specifying the reference to retrieve.
+   * @param bibleReference - A {@link BibleReferenceBase} object specifying the reference to retrieve.
    * @returns The chapter content as an HTML string.
    */
-  getChapter(bibleReference: BibleReference): Promise<string> {
+  getChapter(bibleReference: BibleReferenceBase): Promise<string> {
     return Module.chapter(bibleReference);
   },
 };
