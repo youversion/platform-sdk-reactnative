@@ -38,10 +38,10 @@ struct YVPBibleTextView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
             BibleTextView(
                 bibleReference(),
                 textOptions: textOptions(),
-                onVerseTap: { bibleRef, point in
+                onVerseTap: { bibleRef, urlScheme, footnotes in
                     props.onTap([
                         "bibleReference": toJsBibleReference(bibleRef),
-                        "point": toJsPoint(point)
+                        "urlScheme": urlScheme
                     ])
                 }
             )
@@ -57,10 +57,7 @@ struct YVPBibleTextView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
             "type": "verse"
         ]
     }
-    
-    func toJsPoint(_ point: CGPoint) -> [String: CGFloat] {
-        ["x": point.x, "y": point.y]
-    }
+
     
     func bibleReference() -> BibleReference {
         if let start = props.verseStart, let end = props.verseEnd {
@@ -108,6 +105,8 @@ struct YVPBibleTextView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
         case "none": .none
         case "inline": .inline
         case "marker": .marker
+        case "letters": .letters
+        case "image": .image
         default: .none
         }
     }

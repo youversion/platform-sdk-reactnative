@@ -68,10 +68,10 @@ internal struct BibleVersionRecord: Record {
     var abbreviation: String?
     
     @Field
-    var copyrightLong: String?
+    var promotionalContent: String?
     
     @Field
-    var copyrightShort: String?
+    var copyright: String?
     
     @Field
     var languageTag: String?
@@ -95,6 +95,9 @@ internal struct BibleVersionRecord: Record {
     var bookCodes: [String]?
     
     @Field
+    var organizationId: String?
+    
+    @Field
     var books: [BibleBookRecord]?
     
     @Field
@@ -105,14 +108,15 @@ internal struct BibleVersionRecord: Record {
     init(bibleVersion: BibleVersion) {
         self.id = bibleVersion.id
         self.abbreviation = bibleVersion.abbreviation
-        self.copyrightLong = bibleVersion.copyrightLong
-        self.copyrightShort = bibleVersion.copyrightShort
+        self.promotionalContent = bibleVersion.promotionalContent
+        self.copyright = bibleVersion.copyright
         self.languageTag = bibleVersion.languageTag
         self.localizedAbbreviation = bibleVersion.localizedAbbreviation
         self.localizedTitle = bibleVersion.localizedTitle
         self.readerFooter = bibleVersion.readerFooter
         self.readerFooterUrl = bibleVersion.readerFooterUrl
         self.title = bibleVersion.title
+        self.organizationId = bibleVersion.organizationId
         self.bookCodes = bibleVersion.bookCodes
         
         if let bibleVersionBooks = bibleVersion.books {
@@ -125,7 +129,7 @@ internal struct BibleVersionRecord: Record {
 
 internal struct BibleBookRecord: Record {
     @Field
-    var usfm: String?
+    var id: String?
     
     @Field
     var abbreviation: String?
@@ -134,18 +138,22 @@ internal struct BibleBookRecord: Record {
     var title: String?
     
     @Field
-    var titleLong: String?
+    var fullTitle: String?
     
     @Field
     var chapters: [BibleChapterRecord]?
     
+    @Field
+    var canon: String?
+    
     init() { }
     
     init(bibleBook: BibleBook) {
-        self.usfm = bibleBook.usfm
+        self.id = bibleBook.id
         self.abbreviation = bibleBook.abbreviation
         self.title = bibleBook.title
-        self.titleLong = bibleBook.titleLong
+        self.fullTitle = bibleBook.fullTitle
+        self.canon = bibleBook.canon
         
         if let bibleBookChapters = bibleBook.chapters {
             self.chapters = bibleBookChapters.map(BibleChapterRecord.init)
@@ -155,10 +163,7 @@ internal struct BibleBookRecord: Record {
 
 internal struct BibleChapterRecord: Record {
     @Field
-    var bookUSFM: String?
-    
-    @Field
-    var isCanonical: Bool?
+    var id: String?
     
     @Field
     var passageId: String?
@@ -169,8 +174,7 @@ internal struct BibleChapterRecord: Record {
     init() { }
     
     init(bibleChapter: BibleChapter) {
-        self.bookUSFM = bibleChapter.bookUSFM
-        self.isCanonical = bibleChapter.isCanonical
+        self.id = bibleChapter.id
         self.passageId = bibleChapter.passageId
         self.title = bibleChapter.title
     }
