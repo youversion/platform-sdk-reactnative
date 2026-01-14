@@ -19,10 +19,10 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'YouVersionPlatform', '0.1.0'
-  s.dependency 'YouVersionPlatformCore', '0.1.0'
-  s.dependency 'YouVersionPlatformUI', '0.1.0'
-  s.dependency 'YouVersionPlatformReader', '0.1.0'
+  s.dependency 'YouVersionPlatform', '1.0.1'
+  s.dependency 'YouVersionPlatformCore', '1.0.1'
+  s.dependency 'YouVersionPlatformUI', '1.0.1'
+  s.dependency 'YouVersionPlatformReader', '1.0.1'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
