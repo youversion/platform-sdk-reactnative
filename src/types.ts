@@ -141,6 +141,8 @@ export interface OnBibleTextPressEvent {
   /** A reference to the Bible verse that was pressed */
   bibleReference: BibleReferenceVerse;
   urlScheme: string;
+  /** Not implemented yet */
+  footnotes: unknown[];
 }
 
 export interface LanguageOverview {
