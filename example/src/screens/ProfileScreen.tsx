@@ -4,7 +4,7 @@ import {
   YouVersionPlatform,
   YouVersionUserInfo,
 } from "@youversion/platform-sdk-reactnative";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -41,8 +41,12 @@ export function ProfileScreen() {
 
   async function handleSignIn() {
     try {
-      const signInResult = await YouVersionAPI.Users.signIn(["bibles"]);
-      console.log("Sign-in result:", signInResult);
+      const signInResult = await YouVersionAPI.Users.signIn([
+        "email",
+        "profile",
+        "openid",
+      ]);
+      console.log("Sign-in result:", JSON.stringify(signInResult, null, 2));
     } catch (error) {
       Alert.alert("Error signing in");
       console.error("Error signing in:", error);
@@ -76,13 +80,11 @@ export function ProfileScreen() {
       {currentUser && (
         <>
           <Image
-            source={{ uri: currentUser.avatarUrl }}
+            source={{ uri: currentUser.profilePicture }}
             style={styles.avatar}
           />
-          <Text>
-            You are signed in as {currentUser.firstName || "(no firstname)"}{" "}
-            {currentUser.lastName || "(no lastname)"}
-          </Text>
+          <Text>You are signed in as {currentUser.name || "(no name)"}</Text>
+          <Text>{currentUser.email || "(no email)"}</Text>
           <Button title="Sign Out" onPress={handleSignOut} />
         </>
       )}
