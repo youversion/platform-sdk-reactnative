@@ -47,6 +47,7 @@ jobs:
       - name: 🚀 Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           HUSKY: 0
         run: |
           # Configure git for commits by semantic-release
