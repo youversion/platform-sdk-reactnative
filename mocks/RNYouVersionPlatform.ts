@@ -30,12 +30,12 @@ export function signOut(): Promise<void> {
   return Promise.resolve();
 }
 
-export function userInfo(_accessToken?: string): Promise<YouVersionUserInfo> {
+export function userInfo(): Promise<YouVersionUserInfo> {
   return Promise.resolve({
-    avatarUrl: "https://example.com/avatar.png",
-    firstName: "Mock",
-    lastName: "User",
-    yvpUserId: "mock-yvp-user-id",
+    profilePicture: "https://example.com/avatar.png",
+    name: "Mock User",
+    email: "mockuser@example.com",
+    id: "mock-yvp-user-id",
   });
 }
 
@@ -55,8 +55,8 @@ export function versions(_languageTag?: string): Promise<BibleVersion[]> {
       abbreviation: "KJV",
       languageTag: "en",
       bookCodes: ["GEN", "EXO", "LEV"],
-      copyrightLong: "King James Version Copyright",
-      copyrightShort: "KJV Copyright",
+      copyright: "King James Version Copyright",
+      promotionalContent: "<div>promotional content</div>",
       localizedAbbreviation: "KJV",
       localizedTitle: "King James Version",
       textDirection: "ltr",

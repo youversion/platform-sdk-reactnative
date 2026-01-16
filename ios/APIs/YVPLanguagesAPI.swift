@@ -52,7 +52,7 @@ internal struct LanguageRecord: Record {
     var textDirection: String
     
     @Field
-    var defaultBibleVersionId: Int?
+    var defaultBibleId: Int?
     
     init(_ response: LanguageOverview) {
         self.id = response.id
@@ -65,6 +65,6 @@ internal struct LanguageRecord: Record {
         self.variants = response.variants
         self.countries = response.countries
         self.textDirection = response.textDirection
-        self.defaultBibleVersionId = response.defaultBibleVersionId
+        self.defaultBibleId = response.defaultBibleId
     }
 }

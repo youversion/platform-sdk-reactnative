@@ -19,7 +19,7 @@ declare class RNYouVersionPlatformModule extends NativeModule {
 
   signOut(): Promise<void>;
 
-  userInfo(accessToken?: string): Promise<YouVersionUserInfo>;
+  userInfo(): Promise<YouVersionUserInfo>;
 
   verseOfTheDay(dayOfYear: number): Promise<YouVersionVerseOfTheDay>;
 

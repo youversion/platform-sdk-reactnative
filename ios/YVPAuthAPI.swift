@@ -23,7 +23,8 @@ struct YVPAuthAPI {
                     "refreshToken": response.refreshToken,
                     "name": response.name,
                     "profilePicture": response.profilePicture,
-                    "email": response.email
+                    "email": response.email,
+                    "idToken": response.idToken,
                   ])
             } catch {
                 promise.reject(error)
@@ -37,21 +38,13 @@ struct YVPAuthAPI {
         }
     }
     
-    static func userInfo(accessToken: String?, promise: Promise) {
-        Task {
-            do {
-                let response = try await YouVersionAPI.Users.userInfo(accessToken: accessToken)
-                
-                promise.resolve([
-                    "firstName": response.firstName,
-                    "lastName": response.lastName,
-                    "userId": response.userId,
-                    "avatarUrl": response.avatarUrl?.absoluteString
-                ])
-            } catch {
-                promise.reject(error)
-            }
-        }
+    static func userInfo(promise: Promise) {
+        promise.resolve([
+            "name": YouVersionAPI.Users.currentUserName,
+            "email": YouVersionAPI.Users.currentUserEmail,
+            "id": YouVersionAPI.Users.currentUserId,
+            "profilePicture": YouVersionAPI.Users.currentUserProfilePicture
+        ])
     }
 }
 

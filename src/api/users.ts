@@ -26,10 +26,9 @@ export const UsersAPI = {
   /**
    * Retrieves user information for the authenticated user using the provided access token.
    *
-   * @param accessToken - Optionally provide an accessToken, or use the one stored in the SDK after the user signs in
    * @returns A promise that resolves to the user information as a {@link YouVersionUserInfo} object.
    */
-  userInfo(accessToken?: string): Promise<YouVersionUserInfo> {
-    return Module.userInfo(accessToken);
+  userInfo(): Promise<YouVersionUserInfo> {
+    return Module.userInfo();
   },
 };

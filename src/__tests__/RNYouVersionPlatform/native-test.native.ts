@@ -32,14 +32,22 @@ describe("YouVersionPlatform", () => {
 describe("YouVersionAPI.Users", () => {
   describe("#signIn", () => {
     it("passes the provided permissions", async () => {
-      const result = await YouVersionAPI.Users.signIn(["bible_activity"]);
+      const result = await YouVersionAPI.Users.signIn([
+        "email",
+        "profile",
+        "openid",
+      ]);
 
-      expect(Module.signIn).toHaveBeenCalledWith(["bible_activity"]);
+      expect(Module.signIn).toHaveBeenCalledWith([
+        "email",
+        "profile",
+        "openid",
+      ]);
 
       expect(result).toEqual(
         expect.objectContaining({
           accessToken: "mock-access-token",
-          permissions: ["bible_activity"],
+          permissions: ["email", "profile", "openid"],
           yvpUserId: "mock-yvp-user-id",
         }),
       );
@@ -55,27 +63,14 @@ describe("YouVersionAPI.Users", () => {
   });
 
   describe("#userInfo", () => {
-    it("passes the accessToken when provided", async () => {
-      const result = await YouVersionAPI.Users.userInfo("test-access-token");
-
-      expect(Module.userInfo).toHaveBeenCalledWith("test-access-token");
-      expect(result).toEqual({
-        avatarUrl: "https://example.com/avatar.png",
-        firstName: "Mock",
-        lastName: "User",
-        yvpUserId: "mock-yvp-user-id",
-      });
-    });
-
-    it("calls `userInfo` without an accessToken when not provided", async () => {
+    it("calls `userInfo`", async () => {
       const result = await YouVersionAPI.Users.userInfo();
 
-      expect(Module.userInfo).toHaveBeenCalledWith(undefined);
       expect(result).toEqual({
-        avatarUrl: "https://example.com/avatar.png",
-        firstName: "Mock",
-        lastName: "User",
-        yvpUserId: "mock-yvp-user-id",
+        profilePicture: "https://example.com/avatar.png",
+        name: "Mock User",
+        email: "mockuser@example.com",
+        id: "mock-yvp-user-id",
       });
     });
   });

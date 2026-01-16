@@ -9,20 +9,16 @@ export type SignInWithYouVersionResult = {
   name?: string;
   profilePicture?: string;
   email?: string;
+  idToken?: string;
 };
 
-export type SignInWithYouVersionPermission =
-  | "bibles"
-  | "highlights"
-  | "votd"
-  | "demographics"
-  | "bible_activity";
+export type SignInWithYouVersionPermission = "openid" | "email" | "profile";
 
 export interface YouVersionUserInfo {
-  firstName?: string;
-  lastName?: string;
-  userId?: string;
-  avatarUrl?: string;
+  name?: string;
+  email?: string;
+  id?: string;
+  profilePicture?: string;
 }
 
 export interface YouVersionVerseOfTheDay {
@@ -88,7 +84,12 @@ export interface BibleTextOptions {
   renderVerseNumbers?: boolean | null | undefined;
 }
 
-export type BibleTextFootnoteMode = "none" | "inline" | "marker";
+export type BibleTextFootnoteMode =
+  | "none"
+  | "inline"
+  | "marker"
+  | "letters"
+  | "image";
 
 export interface BibleReferenceBase {
   /** The ID of the Bible version */
@@ -139,12 +140,9 @@ export type BibleReference =
 export interface OnBibleTextPressEvent {
   /** A reference to the Bible verse that was pressed */
   bibleReference: BibleReferenceVerse;
-
-  /** The coordinates of the press event */
-  point: {
-    x: number;
-    y: number;
-  };
+  urlScheme: string;
+  /** Not implemented yet */
+  footnotes: unknown[];
 }
 
 export interface LanguageOverview {
@@ -222,7 +220,7 @@ export interface LanguageOverview {
    *
    * @example 111
    */
-  defaultBibleVersionId?: number;
+  defaultBibleId?: number;
 }
 
 export interface HighlightResponse {
@@ -273,14 +271,14 @@ export interface BibleVersion {
    *
    * @example "<p>Biblica is the worldwide publisher and translation sponsor of the New International Version—one of the most widely read contemporary English versions of the Bible. </p> <p>At Biblica, we believe that with God, all things are possible. Partnering with other ministries and people like you, we are reaching the world with God’s Word, providing Bibles that are easier to understand and faster to receive. When God’s Word is put into someone’s hands, it has the power to change everything. </p> <p>To learn more, visit <a href="https://www.biblica.com/privacy-policy/">biblica.com</a> and <a href="http://facebook.com/Biblica">facebook.com/Biblica</a>.</p> <p> </p>"
    */
-  copyrightLong?: string;
+  promotionalContent?: string;
 
   /**
    * Short version of the copyright text provided by the publisher for the given Bible version.
    *
    * @example "The Holy Bible, New International Version® NIV® Copyright © 1973, 1978, 1984, 2011 by Biblica, Inc.® Used by Permission of Biblica, Inc.® All rights reserved worldwide."
    */
-  copyrightShort?: string;
+  copyright?: string;
 
   /**
    * BCP47 canonical language tag for this Bible version
@@ -329,15 +327,18 @@ export interface BibleVersion {
    * @example "ltr"
    */
   textDirection?: string;
+
+  /** uuid */
+  organizationId?: string;
 }
 
 export interface BibleBook {
   /**
-   * Standard book identifier for the Unified Scripture Format Markup (USFM) used in Scripture text processing
+   * Book identifier
    *
    * @example "GEN"
    */
-  usfm?: string;
+  id?: string;
 
   /**
    * Book name abbreviation if provided by the publisher
@@ -354,11 +355,18 @@ export interface BibleBook {
   title?: string;
 
   /**
+   * Full book title if available
+   *
+   * @example "The Book of Genesis"
+   */
+  fullTitle?: string;
+
+  /**
    * Indicates if this is Old Testament, New Testament, or Deuterocanonical
    *
-   * @example "ot"
+   * @example "new_testament"
    */
-  canon?: "nt" | "ot" | "dc";
+  canon?: "new_testament" | "old_testament" | "deuterocanon";
 
   chapters?: BibleChapter[];
 }
@@ -370,15 +378,6 @@ export interface BibleChapter {
    * @example 1
    */
   id?: string;
-
-  /**
-   * Book identifier
-   *
-   * @example "GEN"
-   */
-  bookUSFM?: string;
-
-  isCanonical?: boolean;
 
   /**
    * Canonical representation of the passage
