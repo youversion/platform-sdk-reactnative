@@ -15,7 +15,7 @@ jobs:
       contents: write # to create releases and push commits
       issues: write # to comment on released issues
       pull-requests: write # to comment on released PRs
-      id-token: write # for npm provenance
+      id-token: write # for npm provenance and trusted publishing
 
     steps:
       - name: 📥 Checkout
@@ -29,7 +29,7 @@ jobs:
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # LTS
+          node-version: "22" # 22.14.0 or Higher LTS
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
@@ -47,8 +47,6 @@ jobs:
       - name: 🚀 Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           HUSKY: 0
         run: |
           # Configure git for commits by semantic-release
