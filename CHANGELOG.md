@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.0 (2026-01-16)
+
+* chore: Depend on most recent Swift SDK version and update breaking changes (#27) ([a042211](https://github.com/youversion/platform-sdk-reactnative/commit/a042211)), closes [#27](https://github.com/youversion/platform-sdk-reactnative/issues/27)
+* chore(ci): Disable NPM tokens in release workflow (#28) ([c63c21a](https://github.com/youversion/platform-sdk-reactnative/commit/c63c21a)), closes [#28](https://github.com/youversion/platform-sdk-reactnative/issues/28)
+* chore(ci): update semantic-release to support OIDC workflow (#29) ([de337dc](https://github.com/youversion/platform-sdk-reactnative/commit/de337dc)), closes [#29](https://github.com/youversion/platform-sdk-reactnative/issues/29)
+* chore(ci): YPE-1050 Modify release.yml for permissions and Node.js version ([2c86c6f](https://github.com/youversion/platform-sdk-reactnative/commit/2c86c6f))
+* Add NODE_AUTH_TOKEN to release workflow ([2bdc89c](https://github.com/youversion/platform-sdk-reactnative/commit/2bdc89c))
+* Add provenance option to npm release configuration ([d746acf](https://github.com/youversion/platform-sdk-reactnative/commit/d746acf))
+* Enable NPM_CONFIG_PROVENANCE in release workflow ([e027853](https://github.com/youversion/platform-sdk-reactnative/commit/e027853))
+* Update Node.js version and add NPM upgrade step ([ee94aa2](https://github.com/youversion/platform-sdk-reactnative/commit/ee94aa2))
+* feat: add support for `configure` in Kotlin (#16) ([d9bca2d](https://github.com/youversion/platform-sdk-reactnative/commit/d9bca2d)), closes [#16](https://github.com/youversion/platform-sdk-reactnative/issues/16)
+* feat: implement `setApiHost` and `getAccessToken` in Kotlin (#17) ([a4ee43c](https://github.com/youversion/platform-sdk-reactnative/commit/a4ee43c)), closes [#17](https://github.com/youversion/platform-sdk-reactnative/issues/17)
+* feat: Implement `SignInWithYouVersionButton` for Kotlin (#26) ([5072471](https://github.com/youversion/platform-sdk-reactnative/commit/5072471)), closes [#26](https://github.com/youversion/platform-sdk-reactnative/issues/26)
+* feat: Implement API utils for Kotlin/Android (#25) ([9a88926](https://github.com/youversion/platform-sdk-reactnative/commit/9a88926)), closes [#25](https://github.com/youversion/platform-sdk-reactnative/issues/25)
+* feat: implement votd API endpoint for Kotlin (#19) ([59e6874](https://github.com/youversion/platform-sdk-reactnative/commit/59e6874)), closes [#19](https://github.com/youversion/platform-sdk-reactnative/issues/19)
+* docs: add AI agent code review guidelines (#23) ([8218cec](https://github.com/youversion/platform-sdk-reactnative/commit/8218cec)), closes [#23](https://github.com/youversion/platform-sdk-reactnative/issues/23)
+
 ## <small>0.7.2 (2025-11-24)</small>
 
 * fix(release): update package name to align to SDK naming (#24) ([9d4a1d7](https://github.com/youversion/platform-sdk-reactnative/commit/9d4a1d7)), closes [#24](https://github.com/youversion/platform-sdk-reactnative/issues/24)

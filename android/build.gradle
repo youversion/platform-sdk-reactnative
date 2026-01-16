@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 group = 'com.youversion.reactnativesdk'
-version = '0.7.2'
+version = '0.8.0'
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
@@ -36,7 +36,7 @@ android {
   namespace "com.youversion.reactnativesdk"
   defaultConfig {
     versionCode 1
-    versionName "0.7.2"
+    versionName "0.8.0"
   }
   buildFeatures {
     compose true
