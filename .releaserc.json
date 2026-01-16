@@ -68,6 +68,7 @@
       "@semantic-release/npm",
       {
         "npmPublish": true,
+        "provenance": true,
         "tarballDir": "dist"
       }
     ],
