@@ -29,9 +29,12 @@ jobs:
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22" # 22.14.0 or Higher LTS
+          node-version: "24" # 24 or Higher LTS
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
+
+      - name: 🔼 Upgrade NPM
+        run: npm install -g npm@latest
 
       - name: 📦 Install dependencies
         run: npm ci
