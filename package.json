@@ -35,7 +35,6 @@
   "jest": {
     "preset": "expo-module-scripts"
   },
-  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
@@ -48,7 +47,7 @@
     "expo-module-scripts": "^5.0.7",
     "husky": "^9.1.7",
     "react-native": "0.81.4",
-    "semantic-release": "^24.2.0"
+    "semantic-release": "^25.0.2"
   },
   "peerDependencies": {
     "expo": ">=54.0.0",
