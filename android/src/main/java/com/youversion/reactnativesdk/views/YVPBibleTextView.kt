@@ -1,20 +1,24 @@
 package com.youversion.reactnativesdk.views
 
 import android.content.Context
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.sp
+import com.youversion.platform.core.bibles.domain.BibleReference
+import com.youversion.platform.ui.views.BibleText
+import com.youversion.platform.ui.views.BibleTextFootnoteMode
+import com.youversion.platform.ui.views.BibleTextOptions
 import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.viewevent.EventDispatcher
+import expo.modules.kotlin.views.AutoSizingComposable
 import expo.modules.kotlin.views.ComposeProps
+import expo.modules.kotlin.views.Direction
 import expo.modules.kotlin.views.ExpoComposeView
+import java.util.EnumSet
 
 data class BibleTextViewProps(
     // Styling
@@ -44,17 +48,76 @@ class YVPBibleTextView(context: Context, appContext: AppContext) :
 
     @Composable
     override fun Content(modifier: Modifier) {
-        // TODO: Replace with actual BibleText composable when Kotlin SDK is ready
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "BibleTextView placeholder - versionId: ${props.versionId.value}, " +
-                       "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
-                color = Color.Gray
+        val reference = bibleReference() ?: return
+
+        AutoSizingComposable(shadowNodeProxy, axis = EnumSet.of(Direction.VERTICAL)) {
+            BibleText(
+                reference = reference,
+                textOptions = textOptions(),
+                onVerseTap = { ref, _ ->
+                    onTap(
+                        mapOf(
+                            "bibleReference" to mapOf(
+                                "versionId" to ref.versionId,
+                                "bookUSFM" to ref.bookUSFM,
+                                "chapter" to ref.chapter,
+                                "verse" to ref.verseStart,
+                                "type" to "verse"
+                            ),
+                            "urlScheme" to "reference"
+                        )
+                    )
+                }
             )
+        }
+    }
+
+    private fun bibleReference(): BibleReference? {
+        val versionId = props.versionId.value ?: return null
+        val bookUSFM = props.bookUSFM.value ?: return null
+        val chapter = props.chapter.value ?: return null
+
+        val verseStart = props.verseStart.value
+        val verseEnd = props.verseEnd.value
+
+        return if (verseStart != null && verseEnd != null) {
+            BibleReference(
+                versionId = versionId,
+                bookUSFM = bookUSFM,
+                chapter = chapter,
+                verseStart = verseStart,
+                verseEnd = verseEnd
+            )
+        } else {
+            BibleReference(
+                versionId = versionId,
+                bookUSFM = bookUSFM,
+                chapter = chapter,
+                verse = props.verse.value
+            )
+        }
+    }
+
+    private fun textOptions(): BibleTextOptions {
+        return BibleTextOptions(
+            fontFamily = FontFamily.Serif, // TODO: Map font family string
+            fontSize = (props.fontSize.value ?: 16f).sp,
+            lineSpacing = props.lineSpacing.value?.sp,
+            textColor = props.textColor.value?.let { Color(it) },
+            wocColor = props.wocColor.value?.let { Color(it) } ?: Color(0xFFF04C59),
+            renderVerseNumbers = props.renderVerseNumbers.value ?: true,
+            footnoteMode = footnoteMode()
+        )
+    }
+
+    private fun footnoteMode(): BibleTextFootnoteMode {
+        return when (props.footnoteMode.value) {
+            "none" -> BibleTextFootnoteMode.NONE
+            "inline" -> BibleTextFootnoteMode.INLINE
+            "marker" -> BibleTextFootnoteMode.MARKER
+            "letters" -> BibleTextFootnoteMode.LETTERS
+            "image" -> BibleTextFootnoteMode.IMAGE
+            else -> BibleTextFootnoteMode.NONE
         }
     }
 }
