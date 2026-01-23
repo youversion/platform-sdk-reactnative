@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.GenericFontFamily
 import androidx.compose.ui.unit.sp
 import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.ui.views.BibleText
@@ -99,15 +100,26 @@ class YVPBibleTextView(context: Context, appContext: AppContext) :
     }
 
     private fun textOptions(): BibleTextOptions {
+        // Note: paragraphSpacing prop is not supported by the Kotlin SDK's BibleTextOptions
         return BibleTextOptions(
-            fontFamily = FontFamily.Serif, // TODO: Map font family string
+            fontFamily = fontFamily(),
             fontSize = (props.fontSize.value ?: 16f).sp,
             lineSpacing = props.lineSpacing.value?.sp,
             textColor = props.textColor.value?.let { Color(it) },
-            wocColor = props.wocColor.value?.let { Color(it) } ?: Color(0xFFF04C59),
+            wocColor = props.wocColor.value?.let { Color(it) } ?: Color(0xFFFF3D4D),
             renderVerseNumbers = props.renderVerseNumbers.value ?: true,
             footnoteMode = footnoteMode()
         )
+    }
+
+    private fun fontFamily(): FontFamily {
+        return when (props.fontFamily.value?.lowercase()) {
+            "serif", "times", "times new roman" -> FontFamily.Serif
+            "sans-serif", "sans", "arial", "helvetica" -> FontFamily.SansSerif
+            "monospace", "mono", "courier" -> FontFamily.Monospace
+            "cursive" -> FontFamily.Cursive
+            else -> FontFamily.Serif
+        }
     }
 
     private fun footnoteMode(): BibleTextFootnoteMode {
