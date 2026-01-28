@@ -6,8 +6,8 @@ import com.youversion.platform.core.languages.models.Language
 object YVPLanguagesApi {
     suspend fun languages(country: String?): List<LanguageRecord> {
         val response = YouVersionApi.languages.languages(country)
-        // Use component1() to access the first component (data) of the data class
-        val dataList = response.component1() as List<Language>
+        // PaginatedResponse cannot be imported, so use extension function to extract data
+        val dataList: List<Language> = response.extractPaginatedData()
         val records = dataList.map { LanguageRecord(it) }
         return records
     }

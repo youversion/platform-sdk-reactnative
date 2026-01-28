@@ -9,8 +9,8 @@ import com.youversion.platform.core.bibles.models.BibleVersion
 object YVPBibleApi {
     suspend fun versions(languageTag: String?): List<BibleVersionRecord> {
         val response = YouVersionApi.bible.versions(languageTag)
-        // Use component1() to access the first component (data) of the data class
-        val dataList = response.component1() as List<BibleVersion>
+        // PaginatedResponse cannot be imported, so use extension function to extract data
+        val dataList: List<BibleVersion> = response.extractPaginatedData()
         val records = dataList.map { BibleVersionRecord(it) }
         return records
     }
