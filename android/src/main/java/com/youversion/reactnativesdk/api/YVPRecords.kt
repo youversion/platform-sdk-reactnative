@@ -92,8 +92,8 @@ data class BibleVersionRecord(
     constructor(bibleVersion: BibleVersion) : this(
         id = bibleVersion.id,
         abbreviation = bibleVersion.abbreviation,
-        copyrightLong = bibleVersion.copyrightLong,
-        copyrightShort = bibleVersion.copyrightShort,
+        copyrightLong = bibleVersion.promotionalContent,
+        copyrightShort = bibleVersion.copyright,
         languageTag = bibleVersion.languageTag,
         localizedAbbreviation = bibleVersion.localizedAbbreviation,
         localizedTitle = bibleVersion.localizedTitle,
@@ -131,18 +131,12 @@ data class BibleChapterRecord(
     @Field
     val id: String?,
     @Field
-    val bookUSFM: String?,
-    @Field
-    val isCanonical: Boolean?,
-    @Field
     val passageId: String?,
     @Field
     val title: String?
 ) : Record {
     constructor(bibleChapter: BibleChapter) : this(
         id = bibleChapter.id,
-        bookUSFM = bibleChapter.bookUSFM,
-        isCanonical = bibleChapter.isCanonical,
         passageId = bibleChapter.passageId,
         title = bibleChapter.title
     )

@@ -31,10 +31,9 @@ public class RNYouVersionPlatformModule: Module {
         }
         
         AsyncFunction("userInfo") { (
-            accessToken: String?,
             promise: Promise
         ) in
-            YVPAuthAPI.userInfo(accessToken: accessToken, promise: promise)
+            YVPAuthAPI.userInfo(promise: promise)
         }
         
         AsyncFunction("verseOfTheDay") { (

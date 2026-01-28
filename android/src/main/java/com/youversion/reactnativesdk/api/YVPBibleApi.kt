@@ -4,11 +4,14 @@ import android.content.Context
 import com.youversion.platform.core.api.YouVersionApi
 import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.core.bibles.domain.BibleVersionRepository
+import com.youversion.platform.core.bibles.models.BibleVersion
 
 object YVPBibleApi {
     suspend fun versions(languageTag: String?): List<BibleVersionRecord> {
         val response = YouVersionApi.bible.versions(languageTag)
-        val records = response.map { BibleVersionRecord(it) }
+        // PaginatedResponse cannot be imported, so use extension function to extract data
+        val dataList: List<BibleVersion> = response.extractPaginatedData()
+        val records = dataList.map { BibleVersionRecord(it) }
         return records
     }
 
