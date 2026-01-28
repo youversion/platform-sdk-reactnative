@@ -131,18 +131,12 @@ data class BibleChapterRecord(
     @Field
     val id: String?,
     @Field
-    val bookUSFM: String?,
-    @Field
-    val isCanonical: Boolean?,
-    @Field
     val passageId: String?,
     @Field
     val title: String?
 ) : Record {
     constructor(bibleChapter: BibleChapter) : this(
         id = bibleChapter.id,
-        bookUSFM = bibleChapter.passageId?.substringBefore(".")?.uppercase(),
-        isCanonical = bibleChapter.isCanonical,
         passageId = bibleChapter.passageId,
         title = bibleChapter.title
     )

@@ -6,34 +6,7 @@ The Kotlin SDK's `PaginatedResponse<T>` class cannot be directly imported in the
 
 ## Solution Options
 
-### Option 1: component1() Destructuring (Current Solution)
-
-**How it works:**
-- Kotlin automatically generates `component1()`, `component2()`, etc. for data classes
-- These functions enable destructuring: `val (data, token, size) = response`
-- `component1()` returns the first property in declaration order
-
-**Code:**
-```kotlin
-val response = YouVersionApi.languages.languages(country)
-val dataList = response.component1() as List<Language>
-```
-
-**Pros:**
-- ✅ Works without importing `PaginatedResponse`
-- ✅ Uses standard Kotlin feature
-- ✅ No reflection overhead
-- ✅ Compiles successfully
-
-**Cons:**
-- ❌ Fragile: breaks if property order changes in `PaginatedResponse`
-- ❌ Requires unsafe cast
-- ❌ Less readable than `response.data`
-- ❌ Not immediately obvious what `component1()` returns
-
----
-
-### Option 2: Extension Function with Reflection (Better)
+### Option 1: Extension Function with Reflection (current)
 
 **How it works:**
 - Create a reusable extension function that uses reflection to access the `data` property
