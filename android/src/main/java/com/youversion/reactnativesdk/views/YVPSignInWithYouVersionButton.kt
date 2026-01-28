@@ -1,12 +1,15 @@
 package com.youversion.reactnativesdk.views
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.foundation.layout.Box
+import com.youversion.platform.core.users.model.SignInWithYouVersionPermission
 import com.youversion.platform.ui.views.SignInWithYouVersionButton
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonDefaults
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonMode
@@ -33,13 +36,15 @@ class YVPSignInWithYouVersionButton(context: Context, appContext: AppContext) :
     @Composable
     override fun Content(modifier: Modifier) {
         AutoSizingComposable(shadowNodeProxy, axis = EnumSet.of(Direction.HORIZONTAL, Direction.VERTICAL)) {
-            SignInWithYouVersionButton(
-                onClick = { onTap(mapOf()) },
-                mode = mode(),
-                stroked = stroked(),
-                shape = shape(),
-                dark = isDark()
-            )
+            Box(modifier = Modifier.clickable { onTap(mapOf()) }) {
+                SignInWithYouVersionButton(
+                    permissions = { setOf(SignInWithYouVersionPermission.PROFILE) },
+                    mode = mode(),
+                    stroked = stroked(),
+                    shape = shape(),
+                    dark = isDark()
+                )
+            }
         }
     }
 

@@ -25,11 +25,7 @@ class RNYouVersionPlatformModule : Module() {
         }
 
         Function("setApiHost") { apiHost: String ->
-            // The SDK API may have changed - try to set apiHost using reflection
-            // as the property appears to be immutable (val) and no setter method exists
-            val field = YouVersionPlatformConfiguration::class.java.getDeclaredField("apiHost")
-            field.isAccessible = true
-            field.set(null, apiHost)
+            YouVersionPlatformConfiguration.setApiHost(apiHost)
         }
         
         Function("getAccessToken") {

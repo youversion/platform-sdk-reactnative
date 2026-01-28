@@ -92,8 +92,8 @@ data class BibleVersionRecord(
     constructor(bibleVersion: BibleVersion) : this(
         id = bibleVersion.id,
         abbreviation = bibleVersion.abbreviation,
-        copyrightLong = bibleVersion.copyrightLong,
-        copyrightShort = bibleVersion.copyrightShort,
+        copyrightLong = bibleVersion.promotionalContent,
+        copyrightShort = bibleVersion.copyright,
         languageTag = bibleVersion.languageTag,
         localizedAbbreviation = bibleVersion.localizedAbbreviation,
         localizedTitle = bibleVersion.localizedTitle,
@@ -141,7 +141,7 @@ data class BibleChapterRecord(
 ) : Record {
     constructor(bibleChapter: BibleChapter) : this(
         id = bibleChapter.id,
-        bookUSFM = bibleChapter.bookUSFM,
+        bookUSFM = bibleChapter.passageId?.substringBefore(".")?.uppercase(),
         isCanonical = bibleChapter.isCanonical,
         passageId = bibleChapter.passageId,
         title = bibleChapter.title
