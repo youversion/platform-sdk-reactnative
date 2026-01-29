@@ -4,9 +4,10 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
   test-ios-build:
     runs-on: macos-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout repository
