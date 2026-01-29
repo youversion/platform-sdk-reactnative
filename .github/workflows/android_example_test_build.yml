@@ -36,5 +36,5 @@ jobs:
         run: npx expo prebuild --clean --platform android
 
       - name: Build Android app
-        working-directory: example
-        run: npm run android
+        working-directory: example/android
+        run: ./gradlew assembleDebug --no-daemon
