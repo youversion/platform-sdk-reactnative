@@ -37,4 +37,4 @@ jobs:
 
       - name: Build Android app
         working-directory: example
-        run: npm run android -- --no-packager
+        run: npm run android
