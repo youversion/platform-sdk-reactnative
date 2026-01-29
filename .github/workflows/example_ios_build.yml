@@ -1,0 +1,45 @@
+name: Test Example App Build
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-ios-build:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies (root)
+        run: npm ci
+
+      - name: Install dependencies (example app)
+        working-directory: example
+        run: npm ci
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          working-directory: example/ios
+
+      - name: Install CocoaPods dependencies
+        working-directory: example/ios
+        run: pod install
+
+      - name: Prebuild Expo app
+        working-directory: example
+        run: npx expo prebuild --clean --platform ios
+
+      - name: Build iOS app
+        working-directory: example
+        run: npm run ios -- --no-install
