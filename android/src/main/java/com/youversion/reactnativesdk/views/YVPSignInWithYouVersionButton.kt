@@ -11,7 +11,6 @@ import com.youversion.platform.ui.views.SignInWithYouVersionButton
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonDefaults
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonMode
 import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.viewevent.EventDispatcher
 import expo.modules.kotlin.views.AutoSizingComposable
 import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.Direction
@@ -28,17 +27,17 @@ data class SignInWithYouVersionButtonProps(
 class YVPSignInWithYouVersionButton(context: Context, appContext: AppContext) :
     ExpoComposeView<SignInWithYouVersionButtonProps>(context, appContext, withHostingView = true) {
     override val props = SignInWithYouVersionButtonProps()
-    private val onTap by EventDispatcher()
+//    private val onTap by EventDispatcher()
 
     @Composable
     override fun Content(modifier: Modifier) {
         AutoSizingComposable(shadowNodeProxy, axis = EnumSet.of(Direction.HORIZONTAL, Direction.VERTICAL)) {
             SignInWithYouVersionButton(
-                onClick = { onTap(mapOf()) },
                 mode = mode(),
                 stroked = stroked(),
                 shape = shape(),
-                dark = isDark()
+                dark = isDark(),
+                permissions = { HashSet() }
             )
         }
     }
