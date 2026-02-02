@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.0 (2026-01-31)
+
+* feat: Update Kotlin SDK and fix all breaking changes (#36) ([0e03b0e](https://github.com/youversion/platform-sdk-reactnative/commit/0e03b0e)), closes [#36](https://github.com/youversion/platform-sdk-reactnative/issues/36)
+* feat (android): add view module stubs for RN bridging (#31) ([66cf642](https://github.com/youversion/platform-sdk-reactnative/commit/66cf642)), closes [#31](https://github.com/youversion/platform-sdk-reactnative/issues/31)
+
 ## 0.8.0 (2026-01-16)
 
 * chore: Depend on most recent Swift SDK version and update breaking changes (#27) ([a042211](https://github.com/youversion/platform-sdk-reactnative/commit/a042211)), closes [#27](https://github.com/youversion/platform-sdk-reactnative/issues/27)

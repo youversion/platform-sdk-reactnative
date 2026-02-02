@@ -43,7 +43,7 @@ data class LanguageRecord(
     @Field
     val textDirection: String,
     @Field
-    val defaultBibleVersionId: Int?
+    val defaultBibleId: Int?
 
 ) : Record {
     constructor(language: Language) : this(
@@ -57,7 +57,7 @@ data class LanguageRecord(
         variants = language.variants,
         countries = language.countries,
         textDirection = language.textDirection,
-        defaultBibleVersionId = language.defaultBibleVersionId
+        defaultBibleId = language.defaultBibleVersionId
     )
 }
 
@@ -67,9 +67,9 @@ data class BibleVersionRecord(
     @Field
     val abbreviation: String?,
     @Field
-    val copyrightLong: String?,
+    val promotionalContent: String?,
     @Field
-    val copyrightShort: String?,
+    val copyright: String?,
     @Field
     val languageTag: String?,
     @Field
@@ -87,13 +87,15 @@ data class BibleVersionRecord(
     @Field
     val books: List<BibleBookRecord>?,
     @Field
-    val textDirection: String?
+    val textDirection: String?,
+    @Field
+    val organizationId: String?
 ) : Record {
     constructor(bibleVersion: BibleVersion) : this(
         id = bibleVersion.id,
         abbreviation = bibleVersion.abbreviation,
-        copyrightLong = bibleVersion.promotionalContent,
-        copyrightShort = bibleVersion.copyright,
+        promotionalContent = bibleVersion.promotionalContent,
+        copyright = bibleVersion.copyright,
         languageTag = bibleVersion.languageTag,
         localizedAbbreviation = bibleVersion.localizedAbbreviation,
         localizedTitle = bibleVersion.localizedTitle,
@@ -102,13 +104,14 @@ data class BibleVersionRecord(
         title = bibleVersion.title,
         bookCodes = bibleVersion.bookCodes,
         books = bibleVersion.books?.map { BibleBookRecord(it) },
-        textDirection = bibleVersion.textDirection
+        textDirection = bibleVersion.textDirection,
+        organizationId = bibleVersion.organizationId
     )
 }
 
 data class BibleBookRecord(
     @Field
-    val usfm: String?,
+    val id: String?,
     @Field
     val title: String?,
     @Field
@@ -116,14 +119,17 @@ data class BibleBookRecord(
     @Field
     val canon: String?,
     @Field
-    val chapters: List<BibleChapterRecord>?
+    val chapters: List<BibleChapterRecord>?,
+    @Field
+    val fullTitle: String?
 ) : Record {
     constructor(bibleBook: BibleBook) : this(
-        usfm = bibleBook.usfm,
+        id = bibleBook.id,
         title = bibleBook.title,
         abbreviation = bibleBook.abbreviation,
         canon = bibleBook.canon,
-        chapters = bibleBook.chapters?.map { BibleChapterRecord(it) }
+        chapters = bibleBook.chapters?.map { BibleChapterRecord(it) },
+        fullTitle = bibleBook.fullTitle
     )
 }
 
