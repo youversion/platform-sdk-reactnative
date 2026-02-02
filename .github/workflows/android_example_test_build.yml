@@ -8,7 +8,6 @@ jobs:
   test-android-build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    runs-on: ubuntu-latest
     permissions:
       contents: read
     
@@ -37,8 +36,8 @@ jobs:
 
       - name: Prebuild Expo app
         working-directory: example
-        run: npx expo prebuild --clean --platform android
+        run: npx expo prebuild
 
       - name: Build Android app
         working-directory: example/android
-        run: ./gradlew assembleDebug --no-daemon
+        run: npm run android
