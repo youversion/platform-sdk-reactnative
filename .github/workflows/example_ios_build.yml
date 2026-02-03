@@ -39,7 +39,7 @@ jobs:
 
       - name: Install CocoaPods dependencies
         working-directory: example/ios
-        run: bundle install
+        run: pod install
 
       - name: Build iOS app
         working-directory: example
