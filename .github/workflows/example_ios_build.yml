@@ -32,13 +32,14 @@ jobs:
       - name: Install dependencies (example app)
         working-directory: example
         run: npm ci
+      # Do this before ruby set up it creates the ios directory
+      - name: Generate native iOS project
+        working-directory: example
+        run: npx expo prebuild --platform ios
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-          working-directory: example/ios
+      - name: Install CocoaPods dependencies
+        working-directory: example/ios
+        run: bundle install
 
       - name: Build iOS app
         working-directory: example
