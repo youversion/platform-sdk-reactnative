@@ -60,11 +60,14 @@ jobs:
             echo "::error::Could not determine Xcode scheme"
             exit 1
           fi
+          BUILT_PRODUCTS_DIR="$PWD/build/Products/Debug-iphonesimulator"
+          mkdir -p "$BUILT_PRODUCTS_DIR"
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
+            CONFIGURATION_BUILD_DIR="$BUILT_PRODUCTS_DIR" \
             build 2>&1 | tee build.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "::error::xcodebuild exited with non-zero status"
@@ -79,9 +82,10 @@ jobs:
       - name: Verify build output
         working-directory: example/ios
         run: |
-          APP=$(find build -name '*.app' -type d | head -1)
+          BUILT_PRODUCTS_DIR="build/Products/Debug-iphonesimulator"
+          APP=$(find "$BUILT_PRODUCTS_DIR" -maxdepth 1 -name '*.app' -type d | head -1)
           if [ -z "$APP" ]; then
-            echo "::error::No .app bundle found — build may have failed to produce output"
+            echo "::error::No .app bundle found in $BUILT_PRODUCTS_DIR"
             exit 1
           fi
           echo "✅ iOS build verified: $(basename "$APP") produced successfully"
