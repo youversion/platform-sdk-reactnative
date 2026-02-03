@@ -7,22 +7,18 @@ on:
 jobs:
   test-ios-build:
     runs-on: macos-latest
+    timeout-minutes: 45
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Pin Xcode version for reproducible, stable builds (avoid "latest-stable" drift)
       - name: Select Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.2'
-
-      - name: Get Xcode version (for cache key)
-        id: xcode
-        run: echo "version=$(xcodebuild -version | head -1 | sed 's/Xcode //')" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,66 +32,21 @@ jobs:
       - name: Install dependencies (example app)
         working-directory: example
         run: npm ci
+
       - name: Generate native iOS project
         working-directory: example
         run: npx expo prebuild --platform ios
 
       - name: Cache CocoaPods
         uses: actions/cache@v4
-        id: pods-cache
         with:
           path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile', 'example/package-lock.json') }}-xcode-${{ steps.xcode.outputs.version }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile', 'example/package-lock.json') }}
 
       - name: Install CocoaPods dependencies
         working-directory: example/ios
         run: pod install
 
-      - name: Build iOS app (no simulator launch)
-        working-directory: example/ios
-        shell: bash
-        run: |
-          set -e
-          WORKSPACE=$(ls -d *.xcworkspace | head -1)
-          SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" -json | jq -r '.workspace.schemes[0]')
-          if [ -z "$SCHEME" ]; then
-            echo "::error::Could not determine Xcode scheme"
-            exit 1
-          fi
-          BUILT_PRODUCTS_DIR="$PWD/build/Products/Debug-iphonesimulator"
-          rm -rf "$BUILT_PRODUCTS_DIR"
-          mkdir -p "$BUILT_PRODUCTS_DIR"
-          # Build arm64 only (hosted runners are Apple Silicon; avoid x86_64 to prevent EXConstants/Pods failures)
-          # Sequential build (-jobs 1) for CI stability
-          xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
-            -configuration Debug \
-            -sdk iphonesimulator \
-            -destination 'generic/platform=iOS Simulator' \
-            -derivedDataPath build \
-            -jobs 1 \
-            ARCHS=arm64 \
-            ONLY_ACTIVE_ARCH=NO \
-            CONFIGURATION_BUILD_DIR="$BUILT_PRODUCTS_DIR" \
-            build 2>&1 | tee build.log
-          if [ ${PIPESTATUS[0]} -ne 0 ]; then
-            echo "::error::xcodebuild exited with non-zero status"
-            exit 1
-          fi
-          if ! grep -q "BUILD SUCCEEDED" build.log; then
-            echo "::error::Build did not report BUILD SUCCEEDED — may have been cut off (timeout?) or failed"
-            exit 1
-          fi
-          echo "Build completed successfully."
-
-      - name: Verify build output
-        working-directory: example/ios
-        run: |
-          BUILT_PRODUCTS_DIR="build/Products/Debug-iphonesimulator"
-          APP=$(find "$BUILT_PRODUCTS_DIR" -maxdepth 1 -name '*.app' -type d | head -1)
-          if [ -z "$APP" ]; then
-            echo "::error::No .app bundle found in $BUILT_PRODUCTS_DIR"
-            exit 1
-          fi
-          echo "✅ iOS build verified: $(basename "$APP") produced successfully"
+      - name: Build iOS app
+        working-directory: example
+        run: npm run ios -- --no-install --no-bundler
