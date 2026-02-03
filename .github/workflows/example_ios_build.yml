@@ -52,7 +52,7 @@ jobs:
       - name: Build iOS app (no simulator launch)
         working-directory: example/ios
         run: |
-          WORKSPACE=$(ls *.xcworkspace | head -1)
+          WORKSPACE=$(ls -d *.xcworkspace | head -1)
           SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" -json | jq -r '.workspace.schemes[0]')
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
