@@ -32,15 +32,29 @@ jobs:
       - name: Install dependencies (example app)
         working-directory: example
         run: npm ci
-      # Do this before ruby set up it creates the ios directory
       - name: Generate native iOS project
         working-directory: example
         run: npx expo prebuild --platform ios
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        id: pods-cache
+        with:
+          path: example/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile', 'example/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
 
       - name: Install CocoaPods dependencies
         working-directory: example/ios
         run: pod install
 
-      - name: Build iOS app
-        working-directory: example
-        run: npm run ios -- --no-install
+      - name: Build iOS app (no simulator launch)
+        working-directory: example/ios
+        run: |
+          xcodebuild -workspace react-native-sdk-example.xcworkspace \
+            -scheme react-native-sdk-example \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            build
