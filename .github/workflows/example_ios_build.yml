@@ -67,15 +67,17 @@ jobs:
           BUILT_PRODUCTS_DIR="$PWD/build/Products/Debug-iphonesimulator"
           rm -rf "$BUILT_PRODUCTS_DIR"
           mkdir -p "$BUILT_PRODUCTS_DIR"
-          # Sequential build (-jobs 1) and single arch (ONLY_ACTIVE_ARCH=YES) for CI stability
+          # Build arm64 only (hosted runners are Apple Silicon; avoid x86_64 to prevent EXConstants/Pods failures)
+          # Sequential build (-jobs 1) for CI stability
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
             -jobs 1 \
+            ARCHS=arm64 \
+            ONLY_ACTIVE_ARCH=NO \
             CONFIGURATION_BUILD_DIR="$BUILT_PRODUCTS_DIR" \
-            ONLY_ACTIVE_ARCH=YES \
             build 2>&1 | tee build.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "::error::xcodebuild exited with non-zero status"
