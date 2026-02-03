@@ -58,4 +58,15 @@ jobs:
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
             build
+
+      - name: Verify build output
+        working-directory: example/ios
+        run: |
+          APP=$(find build/Build/Products/Debug-iphonesimulator -maxdepth 1 -name '*.app' -type d | head -1)
+          if [ -z "$APP" ]; then
+            echo "::error::No .app bundle found — build may have failed to produce output"
+            exit 1
+          fi
+          echo "✅ iOS build verified: $(basename "$APP") produced successfully"
