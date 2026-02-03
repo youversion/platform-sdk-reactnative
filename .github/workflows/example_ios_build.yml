@@ -51,15 +51,30 @@ jobs:
 
       - name: Build iOS app (no simulator launch)
         working-directory: example/ios
+        shell: bash
         run: |
+          set -e
           WORKSPACE=$(ls -d *.xcworkspace | head -1)
           SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" -json | jq -r '.workspace.schemes[0]')
+          if [ -z "$SCHEME" ]; then
+            echo "::error::Could not determine Xcode scheme"
+            exit 1
+          fi
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
-            build
+            build 2>&1 | tee build.log
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::xcodebuild exited with non-zero status"
+            exit 1
+          fi
+          if ! grep -q "BUILD SUCCEEDED" build.log; then
+            echo "::error::Build did not report BUILD SUCCEEDED — may have been cut off (timeout?) or failed"
+            exit 1
+          fi
+          echo "Build completed successfully."
 
       - name: Verify build output
         working-directory: example/ios
