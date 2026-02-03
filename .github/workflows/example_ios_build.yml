@@ -52,8 +52,9 @@ jobs:
       - name: Build iOS app (no simulator launch)
         working-directory: example/ios
         run: |
-          xcodebuild -workspace react-native-sdk-example.xcworkspace \
-            -scheme react-native-sdk-example \
+          WORKSPACE=$(ls *.xcworkspace | head -1)
+          SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" -json | jq -r '.workspace.schemes[0]')
+          xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
