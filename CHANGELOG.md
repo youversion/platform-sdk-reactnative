@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.9.1 (2026-02-03)</small>
+
+* fix: ios builds (#38) ([54805de](https://github.com/youversion/platform-sdk-reactnative/commit/54805de)), closes [#38](https://github.com/youversion/platform-sdk-reactnative/issues/38)
+
 ## 0.9.0 (2026-01-31)
 
 * feat: Update Kotlin SDK and fix all breaking changes (#36) ([0e03b0e](https://github.com/youversion/platform-sdk-reactnative/commit/0e03b0e)), closes [#36](https://github.com/youversion/platform-sdk-reactnative/issues/36)
