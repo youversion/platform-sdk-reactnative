@@ -64,7 +64,7 @@ jobs:
       - name: Verify build output
         working-directory: example/ios
         run: |
-          APP=$(find build/Build/Products/Debug-iphonesimulator -maxdepth 1 -name '*.app' -type d | head -1)
+          APP=$(find build -name '*.app' -type d | head -1)
           if [ -z "$APP" ]; then
             echo "::error::No .app bundle found — build may have failed to produce output"
             exit 1
