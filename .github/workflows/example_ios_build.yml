@@ -14,11 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Use latest stable Xcode; consider pinning to specific version (e.g. '16.2') if team needs consistency
+      # Pin Xcode version for reproducible, stable builds (avoid "latest-stable" drift)
       - name: Select Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: 'latest-stable'
+          xcode-version: '16.2'
+
+      - name: Get Xcode version (for cache key)
+        id: xcode
+        run: echo "version=$(xcodebuild -version | head -1 | sed 's/Xcode //')" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,7 +45,7 @@ jobs:
         id: pods-cache
         with:
           path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile', 'example/package-lock.json') }}
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile', 'example/package-lock.json') }}-xcode-${{ steps.xcode.outputs.version }}
           restore-keys: |
             ${{ runner.os }}-pods-
 
@@ -61,13 +65,17 @@ jobs:
             exit 1
           fi
           BUILT_PRODUCTS_DIR="$PWD/build/Products/Debug-iphonesimulator"
+          rm -rf "$BUILT_PRODUCTS_DIR"
           mkdir -p "$BUILT_PRODUCTS_DIR"
+          # Sequential build (-jobs 1) and single arch (ONLY_ACTIVE_ARCH=YES) for CI stability
           xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" \
             -configuration Debug \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
+            -jobs 1 \
             CONFIGURATION_BUILD_DIR="$BUILT_PRODUCTS_DIR" \
+            ONLY_ACTIVE_ARCH=YES \
             build 2>&1 | tee build.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "::error::xcodebuild exited with non-zero status"
