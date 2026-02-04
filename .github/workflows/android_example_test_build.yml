@@ -1,0 +1,43 @@
+name: Test Android Example App Build
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-android-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies (root)
+        run: npm ci
+
+      - name: Install dependencies (example app)
+        working-directory: example
+        run: npm ci
+
+      - name: Prebuild Expo app
+        working-directory: example
+        run: npx expo prebuild
+
+      - name: Build Android app
+        working-directory: example/android
+        run: npm run android
