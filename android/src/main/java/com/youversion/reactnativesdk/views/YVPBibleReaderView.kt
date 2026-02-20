@@ -11,6 +11,7 @@ import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.ExpoComposeView
 
+const val DEFAULT_BEREAN_STANDARD_BIBLE_VERSION = 3034
 
 data class BibleReaderViewProps(
     val versionId: MutableState<Int?> = mutableStateOf(null),
@@ -31,8 +32,8 @@ class YVPBibleReaderView(context: Context, appContext: AppContext) :
     @Composable
     override fun Content(modifier: Modifier) {
         BibleReader(
-            appName = props.appName.value!!,
-            appSignInMessage = props.signInMessage.value!!,
+            appName = props.appName.value ?: "",
+            appSignInMessage = props.signInMessage.value ?: "",
             bibleReference = bibleReference(),
         )
     }
@@ -43,9 +44,9 @@ class YVPBibleReaderView(context: Context, appContext: AppContext) :
 
         if (start != null && end != null) {
             return BibleReference(
-                versionId = props.versionId.value!!,
-                bookUSFM = props.bookUSFM.value!!,
-                chapter = props.chapter.value!!,
+                versionId = props.versionId.value ?: DEFAULT_BEREAN_STANDARD_BIBLE_VERSION,
+                bookUSFM = props.bookUSFM.value ?: "JHN",
+                chapter = props.chapter.value ?: 1,
                 verseStart = start,
                 verseEnd = end
             )
@@ -53,9 +54,9 @@ class YVPBibleReaderView(context: Context, appContext: AppContext) :
 
         if (props.hasReference.value == true) {
             return BibleReference(
-                versionId = props.versionId.value!!,
-                bookUSFM = props.bookUSFM.value!!,
-                chapter = props.chapter.value!!,
+                versionId = props.versionId.value ?: DEFAULT_BEREAN_STANDARD_BIBLE_VERSION,
+                bookUSFM = props.bookUSFM.value ?: "JHN",
+                chapter = props.chapter.value ?: 1,
                 verse = props.verse.value
             )
         }
