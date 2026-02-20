@@ -8,11 +8,8 @@ import androidx.compose.ui.Modifier
 import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.reader.BibleReader
 import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.views.AutoSizingComposable
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.Direction
 import expo.modules.kotlin.views.ExpoComposeView
-import java.util.EnumSet
 
 
 data class BibleReaderViewProps(
