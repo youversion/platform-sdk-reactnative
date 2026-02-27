@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.10.0 (2026-02-27)
+
+* feat: implement Bible reader view for Android (#39) ([681b51b](https://github.com/youversion/platform-sdk-reactnative/commit/681b51b)), closes [#39](https://github.com/youversion/platform-sdk-reactnative/issues/39)
+* YPE-1178 Add IOS CI build test (#34) ([3ae7dad](https://github.com/youversion/platform-sdk-reactnative/commit/3ae7dad)), closes [#34](https://github.com/youversion/platform-sdk-reactnative/issues/34)
+
 ## <small>0.9.1 (2026-02-03)</small>
 
 * fix: ios builds (#38) ([54805de](https://github.com/youversion/platform-sdk-reactnative/commit/54805de)), closes [#38](https://github.com/youversion/platform-sdk-reactnative/issues/38)
