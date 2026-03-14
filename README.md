@@ -27,7 +27,7 @@ This project uses the underlying YouVersion SDKs for [Swift](https://github.com/
 Because support for Jetpack Compose and SwiftUI is a recent development in the React Native ecosystem, this SDK requires recent versions of iOS, Expo, and React Native to work.
 
 > The minimum supported version of iOS is 17.
-> The minimum supported version of Expo is SDK 54.
+> The minimum supported version of Expo is SDK 55.
 
 **Using bare React Native?**
 Follow these instructions to [set up Expo modules in a bare React Native project](https://docs.expo.dev/bare/installing-expo-modules/) before installing this package.
