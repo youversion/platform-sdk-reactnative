@@ -42,15 +42,15 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/invariant": "^2.2.37",
-    "@types/react": "~19.1.0",
-    "expo": "^54.0.10",
+    "@types/react": "~19.2.10",
+    "expo": "^55.0.0",
     "expo-module-scripts": "^5.0.7",
     "husky": "^9.1.7",
-    "react-native": "0.81.4",
+    "react-native": "0.83.2",
     "semantic-release": "^25.0.2"
   },
   "peerDependencies": {
-    "expo": ">=54.0.0",
+    "expo": ">=55.0.0",
     "react": "*",
     "react-native": "*"
   }
