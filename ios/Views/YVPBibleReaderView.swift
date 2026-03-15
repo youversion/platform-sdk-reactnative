@@ -18,7 +18,7 @@ class BibleReaderViewProps: UIBaseViewProps {
     @Field var hasReference: Bool
 }
 
-struct YVPBibleReaderView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPBibleReaderView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleReaderViewProps
     
     init(props: BibleReaderViewProps) {

@@ -26,7 +26,7 @@ class BibleTextViewProps: UIBaseViewProps {
     var onTap = EventDispatcher()
 }
 
-struct YVPBibleTextView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPBibleTextView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleTextViewProps
     @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     

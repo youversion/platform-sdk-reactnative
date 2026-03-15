@@ -9,7 +9,7 @@ class VotdViewProps: UIBaseViewProps {
     @Field var colorScheme: String? = nil
 }
 
-struct YVPVotdView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPVotdView: ExpoSwiftUI.View {
     @ObservedObject var props: VotdViewProps
     @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme

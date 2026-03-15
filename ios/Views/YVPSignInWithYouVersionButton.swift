@@ -11,7 +11,7 @@ class SignInWithYouVersionButtonProps: UIBaseViewProps {
     var onTap = EventDispatcher()
 }
 
-struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View {
     @ObservedObject var props: SignInWithYouVersionButtonProps
     @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
