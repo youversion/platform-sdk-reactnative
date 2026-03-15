@@ -1,3 +1,4 @@
+import { Host } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
@@ -6,17 +7,27 @@ import { BibleReference } from "../types";
 const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("BibleWidgetView");
 
+const MATCH_CONTENTS = { vertical: true, horizontal: false };
+
 /**
  * An opinionated Bible passage display.
  * It displays the book, chapter and version name above the passage. Below the passage text, it displays copyright information and the YouVersion logo.
  * @param props - {@link BibleWidgetViewProps}
  */
-export function BibleWidgetView({ reference, ...props }: BibleWidgetViewProps) {
-  return <NativeView {...(reference || {})} style={styles.view} {...props} />;
+export function BibleWidgetView({
+  reference,
+  style,
+  ...props
+}: BibleWidgetViewProps) {
+  return (
+    <Host matchContents={MATCH_CONTENTS} style={[style, styles.wrapper]}>
+      <NativeView {...(reference || {})} {...props} />
+    </Host>
+  );
 }
 
 const styles = StyleSheet.create({
-  view: {
+  wrapper: {
     alignSelf: "stretch",
   },
 });
@@ -37,6 +48,7 @@ export interface BibleWidgetViewProps {
    * * @defaultValue Uses the system color scheme
    */
   colorScheme?: "light" | "dark" | null | undefined;
+  style?: StyleProp<ViewStyle>;
 }
 
 type NativeProps = Omit<BibleWidgetViewProps, "reference"> &

@@ -1,5 +1,6 @@
+import { Host } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 const NativeView: React.ComponentType<NativeProps> = requireNativeView(
   "SignInWithYouVersionButton",
@@ -55,16 +56,28 @@ export function SignInWithYouVersionButton({
   shape = "capsule",
   isStroked = true,
   colorScheme,
+  style,
   ...props
 }: SignInWithYouVersionButtonProps) {
   return (
-    <NativeView
-      {...props}
-      mode={mode}
-      shape={shape}
-      isStroked={isStroked}
-      colorScheme={colorScheme}
-      onTap={onPress}
-    />
+    <Host
+      matchContents={{ vertical: true, horizontal: true }}
+      style={[style, styles.wrapper]}
+    >
+      <NativeView
+        {...props}
+        mode={mode}
+        shape={shape}
+        isStroked={isStroked}
+        colorScheme={colorScheme}
+        onTap={onPress}
+      />
+    </Host>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    alignSelf: "stretch",
+  },
+});

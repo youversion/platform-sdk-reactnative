@@ -1,28 +1,27 @@
+import { Host } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("VotdView");
 
-export function VotdView({ bibleVersionId = 111, ...props }: VotdViewProps) {
+const MATCH_CONTENTS = { vertical: true, horizontal: false };
+
+export function VotdView({
+  bibleVersionId = 111,
+  style,
+  ...props
+}: VotdViewProps) {
   return (
-    <NativeView
-      style={styles.view}
-      bibleVersionId={bibleVersionId}
-      {...props}
-    />
+    <Host matchContents={MATCH_CONTENTS} style={[style, styles.wrapper]}>
+      <NativeView bibleVersionId={bibleVersionId} {...props} />
+    </Host>
   );
 }
 
-const styles = StyleSheet.create({
-  view: {
-    alignSelf: "stretch",
-  },
-});
-
 export interface VotdViewProps {
   bibleVersionId?: number | null | undefined;
-
+  style?: StyleProp<ViewStyle>;
   /**
    * Controls the color scheme of the text. "dark" would mean to use light text on a dark background, and "light" would mean to use dark text on a light background.
    *
@@ -31,6 +30,10 @@ export interface VotdViewProps {
   colorScheme?: "light" | "dark" | null | undefined;
 }
 
-interface NativeProps extends VotdViewProps {
-  style: StyleProp<ViewStyle>;
-}
+interface NativeProps extends VotdViewProps {}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    alignSelf: "stretch",
+  },
+});

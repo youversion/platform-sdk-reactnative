@@ -1,5 +1,6 @@
+import { Host } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { BibleReference } from "../types";
 
@@ -14,12 +15,13 @@ const NativeView: React.ComponentType<NativeProps> =
  */
 export function BibleReaderView({ reference, ...props }: BibleReaderViewProps) {
   return (
-    <NativeView
-      style={styles.view}
-      hasReference={!!reference}
-      {...(reference || {})}
-      {...props}
-    />
+    <Host style={styles.view}>
+      <NativeView
+        hasReference={!!reference}
+        {...(reference || {})}
+        {...props}
+      />
+    </Host>
   );
 }
 
@@ -47,6 +49,5 @@ export interface BibleReaderViewProps {
 
 type NativeProps = Omit<BibleReaderViewProps, "reference"> &
   Partial<BibleReference> & {
-    style: StyleProp<ViewStyle>;
     hasReference: boolean;
   };
