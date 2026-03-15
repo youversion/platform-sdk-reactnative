@@ -38,6 +38,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
+    "@expo/ui": "~55.0.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
@@ -50,6 +51,7 @@
     "semantic-release": "^25.0.2"
   },
   "peerDependencies": {
+    "@expo/ui": "*",
     "expo": ">=55.0.0",
     "react": "*",
     "react-native": "*"
