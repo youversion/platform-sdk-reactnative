@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class BibleWidgetViewProps: ExpoSwiftUI.ViewProps {
+class BibleWidgetViewProps: UIBaseViewProps {
     // Bible reference
     @Field var versionId: Int
     @Field var bookUSFM: String

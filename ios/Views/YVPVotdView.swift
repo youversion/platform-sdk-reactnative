@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class VotdViewProps: ExpoSwiftUI.ViewProps {
+class VotdViewProps: UIBaseViewProps {
     @Field var bibleVersionId: Int?
     @Field var colorScheme: String? = nil
 }

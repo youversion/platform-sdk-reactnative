@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class BibleTextViewProps: ExpoSwiftUI.ViewProps {
+class BibleTextViewProps: UIBaseViewProps {
     // Styling
     @Field var fontFamily: String?
     @Field var fontSize: CGFloat?

@@ -1,8 +1,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class SignInWithYouVersionButtonProps: ExpoSwiftUI.ViewProps {
+class SignInWithYouVersionButtonProps: UIBaseViewProps {
     @Field var mode: String = "full"
     @Field var shape: String = "capsule"
     @Field var isStroked: Bool = true
