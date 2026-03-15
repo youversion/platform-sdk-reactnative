@@ -28,12 +28,10 @@ struct YVPBibleWidgetView: ExpoSwiftUI.View {
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack(shadowNodeProxy: shadowNodeProxy, axis: .vertical) {
-            BibleWidgetView(
-                reference: bibleReference(),
-                fontSize: CGFloat(props.fontSize ?? 23)
-            ).environment(\.colorScheme, colorScheme())
-        }
+        BibleWidgetView(
+            reference: bibleReference(),
+            fontSize: CGFloat(props.fontSize ?? 23)
+        ).environment(\.colorScheme, colorScheme())
     }
     
     func colorScheme() -> ColorScheme {

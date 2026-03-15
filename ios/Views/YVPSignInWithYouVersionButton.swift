@@ -21,15 +21,13 @@ struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View {
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack (shadowNodeProxy: shadowNodeProxy, axis: .both) {
-            SignInWithYouVersionButton(
-                shape: shape(),
-                mode: mode(),
-                isStroked: props.isStroked
-            ) {
-                props.onTap()
-            }.environment(\.colorScheme, colorScheme())
-        }
+        SignInWithYouVersionButton(
+            shape: shape(),
+            mode: mode(),
+            isStroked: props.isStroked
+        ) {
+            props.onTap()
+        }.environment(\.colorScheme, colorScheme())
     }
     
     func shape() -> SignInWithYouVersionButton.ButtonShape {

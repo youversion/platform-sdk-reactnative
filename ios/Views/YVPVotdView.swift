@@ -19,11 +19,9 @@ struct YVPVotdView: ExpoSwiftUI.View {
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack(shadowNodeProxy: shadowNodeProxy, axis: .vertical) {
-            VotdView(
-                bibleVersionId: props.bibleVersionId ?? 111
-            ).environment(\.colorScheme, colorScheme())
-        }
+        VotdView(
+            bibleVersionId: props.bibleVersionId ?? 111
+        ).environment(\.colorScheme, colorScheme())
     }
     
     func colorScheme() -> ColorScheme {

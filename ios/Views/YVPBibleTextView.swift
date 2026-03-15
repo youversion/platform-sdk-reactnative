@@ -35,18 +35,16 @@ struct YVPBibleTextView: ExpoSwiftUI.View {
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack(shadowNodeProxy: shadowNodeProxy, axis: .vertical) {
-            BibleTextView(
-                bibleReference(),
-                textOptions: textOptions(),
-                onVerseTap: { bibleRef, urlScheme, footnotes in
-                    props.onTap([
-                        "bibleReference": toJsBibleReference(bibleRef),
-                        "urlScheme": urlScheme
-                    ])
-                }
-            )
-        }
+        BibleTextView(
+            bibleReference(),
+            textOptions: textOptions(),
+            onVerseTap: { bibleRef, urlScheme, footnotes in
+                props.onTap([
+                    "bibleReference": toJsBibleReference(bibleRef),
+                    "urlScheme": urlScheme
+                ])
+            }
+        )
     }
     
     func toJsBibleReference(_ bibleRef: BibleReference) -> [String: Any] {
