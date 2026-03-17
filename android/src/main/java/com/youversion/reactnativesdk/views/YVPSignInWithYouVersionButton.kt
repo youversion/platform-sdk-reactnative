@@ -5,17 +5,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import com.youversion.platform.ui.views.SignInWithYouVersionButton
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonDefaults
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonMode
 import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.views.AutoSizingComposable
+import expo.modules.kotlin.views.ComposableScope
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.Direction
 import expo.modules.kotlin.views.ExpoComposeView
-import java.util.EnumSet
 
 data class SignInWithYouVersionButtonProps(
     val mode: MutableState<String?> = mutableStateOf("full"),
@@ -30,16 +27,14 @@ class YVPSignInWithYouVersionButton(context: Context, appContext: AppContext) :
 //    private val onTap by EventDispatcher()
 
     @Composable
-    override fun Content(modifier: Modifier) {
-        AutoSizingComposable(shadowNodeProxy, axis = EnumSet.of(Direction.HORIZONTAL, Direction.VERTICAL)) {
-            SignInWithYouVersionButton(
-                mode = mode(),
-                stroked = stroked(),
-                shape = shape(),
-                dark = isDark(),
-                permissions = { HashSet() }
-            )
-        }
+    override fun ComposableScope.Content() {
+        SignInWithYouVersionButton(
+            mode = mode(),
+            stroked = stroked(),
+            shape = shape(),
+            dark = isDark(),
+            permissions = { HashSet() }
+        )
     }
 
     fun mode(): SignInWithYouVersionButtonMode {

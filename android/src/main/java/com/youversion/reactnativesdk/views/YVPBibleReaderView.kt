@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.reader.BibleReader
 import expo.modules.kotlin.AppContext
+import expo.modules.kotlin.views.ComposableScope
 import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.ExpoComposeView
 
@@ -30,7 +31,7 @@ class YVPBibleReaderView(context: Context, appContext: AppContext) :
     override val props = BibleReaderViewProps()
 
     @Composable
-    override fun Content(modifier: Modifier) {
+    override fun ComposableScope.Content() {
         BibleReader(
             appName = props.appName.value ?: "",
             appSignInMessage = props.signInMessage.value ?: "",

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import expo.modules.kotlin.AppContext
+import expo.modules.kotlin.views.ComposableScope
 import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.ExpoComposeView
 
@@ -36,7 +37,7 @@ class YVPBibleWidgetView(context: Context, appContext: AppContext) :
     override val props = BibleWidgetViewProps()
 
     @Composable
-    override fun Content(modifier: Modifier) {
+    override fun ComposableScope.Content() {
         val isDark = when (props.colorScheme.value) {
             "dark" -> true
             "light" -> false
@@ -45,7 +46,7 @@ class YVPBibleWidgetView(context: Context, appContext: AppContext) :
 
         // TODO: Replace with actual BibleWidget composable when Kotlin SDK is ready
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {

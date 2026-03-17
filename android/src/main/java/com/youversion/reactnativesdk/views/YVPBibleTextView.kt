@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.viewevent.EventDispatcher
+import expo.modules.kotlin.views.ComposableScope
 import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.ExpoComposeView
 
@@ -43,16 +44,16 @@ class YVPBibleTextView(context: Context, appContext: AppContext) :
     private val onTap by EventDispatcher()
 
     @Composable
-    override fun Content(modifier: Modifier) {
+    override fun ComposableScope.Content() {
         // TODO: Replace with actual BibleText composable when Kotlin SDK is ready
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
             Text(
                 text = "BibleTextView placeholder - versionId: ${props.versionId.value}, " +
-                       "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
+                        "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
                 color = Color.Gray
             )
         }
