@@ -33,7 +33,12 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/youversion/platform-sdk-reactnative#readme",
   "jest": {
-    "preset": "expo-module-scripts"
+    "preset": "expo-module-scripts",
+    "moduleNameMapper": {
+      "^@expo/ui/jetpack-compose$": "<rootDir>/src/__mocks__/@expo/ui/jetpack-compose.ts",
+      "^@expo/ui/swift-ui/modifiers$": "<rootDir>/src/__mocks__/@expo/ui/swift-ui/modifiers.ts",
+      "^@expo/ui/swift-ui$": "<rootDir>/src/__mocks__/@expo/ui/swift-ui.ts"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
