@@ -11,7 +11,6 @@ class VotdViewProps: UIBaseViewProps {
 
 struct YVPVotdView: ExpoSwiftUI.View {
     @ObservedObject var props: VotdViewProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
     
     init(props: VotdViewProps) {

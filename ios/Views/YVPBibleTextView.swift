@@ -28,7 +28,6 @@ class BibleTextViewProps: UIBaseViewProps {
 
 struct YVPBibleTextView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleTextViewProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     
     init(props: BibleTextViewProps) {
         self.props = props

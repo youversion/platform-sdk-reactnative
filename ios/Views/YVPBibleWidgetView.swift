@@ -20,7 +20,6 @@ class BibleWidgetViewProps: UIBaseViewProps {
 
 struct YVPBibleWidgetView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleWidgetViewProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
     
     init(props: BibleWidgetViewProps) {

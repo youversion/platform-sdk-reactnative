@@ -13,7 +13,6 @@ class SignInWithYouVersionButtonProps: UIBaseViewProps {
 
 struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View {
     @ObservedObject var props: SignInWithYouVersionButtonProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
     
     init(props: SignInWithYouVersionButtonProps) {
