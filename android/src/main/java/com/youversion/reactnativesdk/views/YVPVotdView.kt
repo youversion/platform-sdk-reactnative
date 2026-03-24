@@ -17,7 +17,7 @@ import expo.modules.kotlin.views.ComposeProps
 import expo.modules.kotlin.views.ExpoComposeView
 
 data class VotdViewProps(
-    val bibleVersionId: MutableState<Int?> = mutableStateOf(111),
+    val bibleVersionId: MutableState<Int?> = mutableStateOf(3034),
     val colorScheme: MutableState<String?> = mutableStateOf(null),
 ) : ComposeProps
 

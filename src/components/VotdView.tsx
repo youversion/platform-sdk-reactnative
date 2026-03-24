@@ -8,7 +8,7 @@ const NativeView: React.ComponentType<NativeProps> =
 const MATCH_CONTENTS = { vertical: true, horizontal: false };
 
 export function VotdView({
-  bibleVersionId = 111,
+  bibleVersionId = 3034,
   style,
   ...props
 }: VotdViewProps) {
@@ -20,12 +20,17 @@ export function VotdView({
 }
 
 export interface VotdViewProps {
+  /**
+   * The ID of the Bible version to use.
+   *
+   * @defaultValue 3034 (Berean Standard Bible)
+   */
   bibleVersionId?: number | null | undefined;
   style?: StyleProp<ViewStyle>;
   /**
    * Controls the color scheme of the text. "dark" would mean to use light text on a dark background, and "light" would mean to use dark text on a light background.
    *
-   * * @defaultValue Uses the system color scheme
+   * @defaultValue Uses the system color scheme
    */
   colorScheme?: "light" | "dark" | null | undefined;
 }

@@ -20,7 +20,7 @@ struct YVPVotdView: ExpoSwiftUI.View {
     
     var body: some View {
         VotdView(
-            bibleVersionId: props.bibleVersionId ?? 111
+            bibleVersionId: props.bibleVersionId ?? 3034
         ).environment(\.colorScheme, colorScheme())
     }
     
