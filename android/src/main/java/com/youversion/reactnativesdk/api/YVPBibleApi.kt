@@ -2,8 +2,6 @@ package com.youversion.reactnativesdk.api
 
 import android.content.Context
 import com.youversion.platform.core.api.YouVersionApi
-import com.youversion.platform.core.bibles.domain.BibleReference
-import com.youversion.platform.core.bibles.domain.BibleVersionRepository
 
 object YVPBibleApi {
     suspend fun versions(languageTag: String?): List<BibleVersionRecord> {
@@ -26,7 +24,7 @@ object YVPBibleApi {
         return record
     }
 
-    suspend fun chapter(bibleReference: BibleReferenceRecord, context: Context): String {
+    suspend fun chapter(bibleReference: BibleReferenceRecord): String {
         val passageId = bibleReference.bookUSFM + "." + bibleReference.chapter.toString()
 
         val response = YouVersionApi.bible.passage(
