@@ -1,5 +1,6 @@
+import { Host } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 import {
   BibleReference,
@@ -24,14 +25,14 @@ export function BibleTextView({
   ...props
 }: BibleTextViewProps) {
   return (
-    <View style={[styles.wrapper, style]}>
+    <Host style={[styles.wrapper, style]}>
       <NativeView
         {...bibleReference}
         {...props}
         onTap={(e: NativeEvent) => onPress?.(e.nativeEvent)}
         style={styles.component}
       />
-    </View>
+    </Host>
   );
 }
 

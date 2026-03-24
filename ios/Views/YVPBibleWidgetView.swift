@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class BibleWidgetViewProps: ExpoSwiftUI.ViewProps {
+class BibleWidgetViewProps: UIBaseViewProps {
     // Bible reference
     @Field var versionId: Int
     @Field var bookUSFM: String
@@ -17,9 +18,8 @@ class BibleWidgetViewProps: ExpoSwiftUI.ViewProps {
 
 }
 
-struct YVPBibleWidgetView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPBibleWidgetView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleWidgetViewProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
     
     init(props: BibleWidgetViewProps) {
@@ -27,12 +27,10 @@ struct YVPBibleWidgetView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack(shadowNodeProxy: shadowNodeProxy, axis: .vertical) {
-            BibleWidgetView(
-                reference: bibleReference(),
-                fontSize: CGFloat(props.fontSize ?? 23)
-            ).environment(\.colorScheme, colorScheme())
-        }
+        BibleWidgetView(
+            reference: bibleReference(),
+            fontSize: CGFloat(props.fontSize ?? 23)
+        ).environment(\.colorScheme, colorScheme())
     }
     
     func colorScheme() -> ColorScheme {

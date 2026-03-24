@@ -33,24 +33,31 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/youversion/platform-sdk-reactnative#readme",
   "jest": {
-    "preset": "expo-module-scripts"
+    "preset": "expo-module-scripts",
+    "moduleNameMapper": {
+      "^@expo/ui/jetpack-compose$": "<rootDir>/src/__mocks__/@expo/ui/jetpack-compose.ts",
+      "^@expo/ui/swift-ui/modifiers$": "<rootDir>/src/__mocks__/@expo/ui/swift-ui/modifiers.ts",
+      "^@expo/ui/swift-ui$": "<rootDir>/src/__mocks__/@expo/ui/swift-ui.ts"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
+    "@expo/ui": "~55.0.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/invariant": "^2.2.37",
-    "@types/react": "~19.1.0",
-    "expo": "^54.0.10",
+    "@types/react": "~19.2.10",
+    "expo": "^55.0.0",
     "expo-module-scripts": "^5.0.7",
     "husky": "^9.1.7",
-    "react-native": "0.81.4",
+    "react-native": "0.83.2",
     "semantic-release": "^25.0.2"
   },
   "peerDependencies": {
-    "expo": ">=54.0.0",
+    "@expo/ui": ">=55.0.0",
+    "expo": ">=55.0.0",
     "react": "*",
     "react-native": "*"
   }

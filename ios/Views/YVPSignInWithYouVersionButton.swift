@@ -1,8 +1,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class SignInWithYouVersionButtonProps: ExpoSwiftUI.ViewProps {
+class SignInWithYouVersionButtonProps: UIBaseViewProps {
     @Field var mode: String = "full"
     @Field var shape: String = "capsule"
     @Field var isStroked: Bool = true
@@ -10,9 +11,8 @@ class SignInWithYouVersionButtonProps: ExpoSwiftUI.ViewProps {
     var onTap = EventDispatcher()
 }
 
-struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View {
     @ObservedObject var props: SignInWithYouVersionButtonProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     @Environment(\.colorScheme) var environmentColorScheme
     
     init(props: SignInWithYouVersionButtonProps) {
@@ -20,15 +20,13 @@ struct YVPSignInWithYouVersionButton: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingV
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack (shadowNodeProxy: shadowNodeProxy, axis: .both) {
-            SignInWithYouVersionButton(
-                shape: shape(),
-                mode: mode(),
-                isStroked: props.isStroked
-            ) {
-                props.onTap()
-            }.environment(\.colorScheme, colorScheme())
-        }
+        SignInWithYouVersionButton(
+            shape: shape(),
+            mode: mode(),
+            isStroked: props.isStroked
+        ) {
+            props.onTap()
+        }.environment(\.colorScheme, colorScheme())
     }
     
     func shape() -> SignInWithYouVersionButton.ButtonShape {
