@@ -20,7 +20,7 @@ export function BibleWidgetView({
   ...props
 }: BibleWidgetViewProps) {
   return (
-    <Host matchContents={MATCH_CONTENTS} style={[style, styles.wrapper]}>
+    <Host matchContents={MATCH_CONTENTS} style={[styles.wrapper, style]}>
       <NativeView {...(reference || {})} {...props} />
     </Host>
   );

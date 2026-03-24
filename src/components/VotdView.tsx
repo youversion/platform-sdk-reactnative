@@ -13,7 +13,7 @@ export function VotdView({
   ...props
 }: VotdViewProps) {
   return (
-    <Host matchContents={MATCH_CONTENTS} style={[style, styles.wrapper]}>
+    <Host matchContents={MATCH_CONTENTS} style={[styles.wrapper, style]}>
       <NativeView bibleVersionId={bibleVersionId} {...props} />
     </Host>
   );
