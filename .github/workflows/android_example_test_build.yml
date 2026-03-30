@@ -26,6 +26,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'gradle'
 
       - name: Install dependencies (root)
         run: npm ci
@@ -40,4 +41,4 @@ jobs:
 
       - name: Build Android app
         working-directory: example/android
-        run: npm run android
+        run: ./gradlew assembleDebug
