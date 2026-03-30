@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class BibleReaderViewProps: ExpoSwiftUI.ViewProps {
+class BibleReaderViewProps: UIBaseViewProps {
     // Bible reference
     @Field var versionId: Int
     @Field var bookUSFM: String
@@ -17,7 +18,7 @@ class BibleReaderViewProps: ExpoSwiftUI.ViewProps {
     @Field var hasReference: Bool
 }
 
-struct YVPBibleReaderView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPBibleReaderView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleReaderViewProps
     
     init(props: BibleReaderViewProps) {

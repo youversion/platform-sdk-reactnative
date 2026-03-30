@@ -2,8 +2,9 @@
 import ExpoModulesCore
 import YouVersionPlatform
 import SwiftUI
+import ExpoUI
 
-class BibleTextViewProps: ExpoSwiftUI.ViewProps {
+class BibleTextViewProps: UIBaseViewProps {
     // Styling
     @Field var fontFamily: String?
     @Field var fontSize: CGFloat?
@@ -25,27 +26,24 @@ class BibleTextViewProps: ExpoSwiftUI.ViewProps {
     var onTap = EventDispatcher()
 }
 
-struct YVPBibleTextView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
+struct YVPBibleTextView: ExpoSwiftUI.View {
     @ObservedObject var props: BibleTextViewProps
-    @EnvironmentObject var shadowNodeProxy: ExpoSwiftUI.ShadowNodeProxy
     
     init(props: BibleTextViewProps) {
         self.props = props
     }
     
     var body: some View {
-        ExpoSwiftUI.AutoSizingStack(shadowNodeProxy: shadowNodeProxy, axis: .vertical) {
-            BibleTextView(
-                bibleReference(),
-                textOptions: textOptions(),
-                onVerseTap: { bibleRef, urlScheme, footnotes in
-                    props.onTap([
-                        "bibleReference": toJsBibleReference(bibleRef),
-                        "urlScheme": urlScheme
-                    ])
-                }
-            )
-        }
+        BibleTextView(
+            bibleReference(),
+            textOptions: textOptions(),
+            onVerseTap: { bibleRef, urlScheme, footnotes in
+                props.onTap([
+                    "bibleReference": toJsBibleReference(bibleRef),
+                    "urlScheme": urlScheme
+                ])
+            }
+        )
     }
     
     func toJsBibleReference(_ bibleRef: BibleReference) -> [String: Any] {

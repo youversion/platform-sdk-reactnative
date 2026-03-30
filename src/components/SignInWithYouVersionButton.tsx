@@ -1,3 +1,5 @@
+import { CommonViewModifierProps, Host } from "@expo/ui/swift-ui";
+import { fixedSize } from "@expo/ui/swift-ui/modifiers";
 import { requireNativeView } from "expo";
 import { StyleProp, ViewStyle } from "react-native";
 
@@ -7,7 +9,7 @@ const NativeView: React.ComponentType<NativeProps> = requireNativeView(
 
 type NativeProps = Omit<SignInWithYouVersionButtonProps, "onPress"> & {
   onTap?: () => void;
-};
+} & CommonViewModifierProps;
 
 export interface SignInWithYouVersionButtonProps {
   /** Controls the width and text of the button
@@ -55,16 +57,20 @@ export function SignInWithYouVersionButton({
   shape = "capsule",
   isStroked = true,
   colorScheme,
+  style,
   ...props
 }: SignInWithYouVersionButtonProps) {
   return (
-    <NativeView
-      {...props}
-      mode={mode}
-      shape={shape}
-      isStroked={isStroked}
-      colorScheme={colorScheme}
-      onTap={onPress}
-    />
+    <Host matchContents={{ vertical: true, horizontal: true }} style={style}>
+      <NativeView
+        {...props}
+        mode={mode}
+        shape={shape}
+        isStroked={isStroked}
+        colorScheme={colorScheme}
+        onTap={onPress}
+        modifiers={[fixedSize()]}
+      />
+    </Host>
   );
 }
