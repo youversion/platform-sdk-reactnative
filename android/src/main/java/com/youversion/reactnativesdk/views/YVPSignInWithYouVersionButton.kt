@@ -1,6 +1,5 @@
 package com.youversion.reactnativesdk.views
 
-import android.content.Context
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -9,10 +8,7 @@ import androidx.compose.ui.graphics.Shape
 import com.youversion.platform.ui.views.SignInWithYouVersionButton
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonDefaults
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonMode
-import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.views.ComposableScope
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.ExpoComposeView
 
 data class SignInWithYouVersionButtonProps(
     val mode: MutableState<String?> = mutableStateOf("full"),
@@ -21,50 +17,48 @@ data class SignInWithYouVersionButtonProps(
     val colorScheme: MutableState<String?> = mutableStateOf(null)
 ) : ComposeProps
 
-class YVPSignInWithYouVersionButton(context: Context, appContext: AppContext) :
-    ExpoComposeView<SignInWithYouVersionButtonProps>(context, appContext, withHostingView = true) {
-    override val props = SignInWithYouVersionButtonProps()
-//    private val onTap by EventDispatcher()
 
-    @Composable
-    override fun ComposableScope.Content() {
-        SignInWithYouVersionButton(
-            mode = mode(),
-            stroked = stroked(),
-            shape = shape(),
-            dark = isDark(),
-            permissions = { HashSet() }
-        )
+@Composable
+fun YVPSignInWithYouVersionButton(
+    props: SignInWithYouVersionButtonProps,
+    onTap: () -> Unit
+) {
+    SignInWithYouVersionButton(
+        mode = mode(props),
+        stroked = stroked(props),
+        shape = shape(props),
+        dark = isDark(props),
+        permissions = { HashSet() }
+    )
+}
+
+fun mode(props: SignInWithYouVersionButtonProps): SignInWithYouVersionButtonMode {
+    return when (props.mode.value) {
+        "full" -> SignInWithYouVersionButtonMode.FULL
+        "compact" -> SignInWithYouVersionButtonMode.COMPACT
+        "iconOnly" -> SignInWithYouVersionButtonMode.ICON_ONLY
+        else -> SignInWithYouVersionButtonMode.FULL
     }
+}
 
-    fun mode(): SignInWithYouVersionButtonMode {
-        return when (props.mode.value) {
-            "full" -> SignInWithYouVersionButtonMode.FULL
-            "compact" -> SignInWithYouVersionButtonMode.COMPACT
-            "iconOnly" -> SignInWithYouVersionButtonMode.ICON_ONLY
-            else -> SignInWithYouVersionButtonMode.FULL
-        }
+fun stroked(props: SignInWithYouVersionButtonProps): Boolean {
+    return props.isStroked.value ?: true
+}
+
+@Composable
+fun shape(props: SignInWithYouVersionButtonProps): Shape {
+    return when (props.shape.value) {
+        "capsule" -> SignInWithYouVersionButtonDefaults.capsuleShape
+        "rectangle" -> SignInWithYouVersionButtonDefaults.rectangleShape
+        else -> SignInWithYouVersionButtonDefaults.capsuleShape
     }
+}
 
-    fun stroked(): Boolean {
-        return props.isStroked.value ?: true
-    }
-
-    @Composable
-    fun shape(): Shape {
-        return when (props.shape.value) {
-            "capsule" -> SignInWithYouVersionButtonDefaults.capsuleShape
-            "rectangle" -> SignInWithYouVersionButtonDefaults.rectangleShape
-            else -> SignInWithYouVersionButtonDefaults.capsuleShape
-        }
-    }
-
-    @Composable
-    fun isDark(): Boolean {
-        return when (props.colorScheme.value) {
-            "dark" -> true
-            "light" -> false
-            else -> isSystemInDarkTheme()
-        }
+@Composable
+fun isDark(props: SignInWithYouVersionButtonProps): Boolean {
+    return when (props.colorScheme.value) {
+        "dark" -> true
+        "light" -> false
+        else -> isSystemInDarkTheme()
     }
 }
