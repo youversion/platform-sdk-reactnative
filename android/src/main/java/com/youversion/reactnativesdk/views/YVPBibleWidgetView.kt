@@ -1,22 +1,16 @@
 package com.youversion.reactnativesdk.views
 
-import android.content.Context
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.views.ComposableScope
+import com.youversion.platform.core.bibles.domain.BibleReference
+import com.youversion.platform.ui.views.BibleTextOptions
+import com.youversion.platform.ui.views.card.BibleCard
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.ExpoComposeView
 
 data class BibleWidgetViewProps(
     // Bible reference
@@ -31,31 +25,62 @@ data class BibleWidgetViewProps(
     val colorScheme: MutableState<String?> = mutableStateOf(null),
 ) : ComposeProps
 
-class YVPBibleWidgetView(context: Context, appContext: AppContext) :
-    ExpoComposeView<BibleWidgetViewProps>(context, appContext, withHostingView = true) {
+@Composable
+fun YVPBibleWidgetView(props: BibleWidgetViewProps) {
+    BibleCard(
+        reference = bibleReference(props),
+        textOptions = textOptions(props),
+        modifier = Modifier.fillMaxHeight(),
+    )
+}
 
-    override val props = BibleWidgetViewProps()
+fun textOptions(props: BibleWidgetViewProps): BibleTextOptions {
+    if (props.fontSize.value == null) {
+        return BibleTextOptions()
+    }
 
-    @Composable
-    override fun ComposableScope.Content() {
-        val isDark = when (props.colorScheme.value) {
-            "dark" -> true
-            "light" -> false
-            else -> isSystemInDarkTheme()
-        }
+    return BibleTextOptions(fontSize = props.fontSize.value!!.sp)
+}
 
-        // TODO: Replace with actual BibleWidget composable when Kotlin SDK is ready
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "BibleWidgetView placeholder\n" +
-                       "${props.bookUSFM.value} ${props.chapter.value}:${props.verse.value ?: "${props.verseStart.value}-${props.verseEnd.value}"}",
-                color = if (isDark) Color.White else Color.DarkGray,
-                fontSize = (props.fontSize.value ?: 23f).sp
-            )
-        }
+fun bibleReference(props: BibleWidgetViewProps): BibleReference {
+    if (props.chapter.value == null) {
+        throw IllegalStateException("Chapter is required")
+    }
+
+    if (props.bookUSFM.value == null) {
+        throw IllegalStateException("Book is required")
+    }
+
+    if (props.versionId.value == null) {
+        throw IllegalStateException("Version is required")
+    }
+
+    val start = props.verseStart.value
+    val end = props.verseEnd.value
+
+    if (start != null && end != null) {
+        return BibleReference(
+            versionId = props.versionId.value!!,
+            bookUSFM = props.bookUSFM.value!!,
+            chapter = props.chapter.value!!,
+            verseStart = start,
+            verseEnd = end
+        )
+    }
+
+    return BibleReference(
+        versionId = props.versionId.value!!,
+        bookUSFM = props.bookUSFM.value!!,
+        chapter = props.chapter.value!!,
+        verse = props.verse.value
+    )
+}
+
+@Composable
+fun isDark(props: BibleWidgetViewProps): Boolean {
+    return when (props.colorScheme.value) {
+        "dark" -> true
+        "light" -> false
+        else -> isSystemInDarkTheme()
     }
 }
