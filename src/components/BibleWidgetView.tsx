@@ -1,6 +1,7 @@
-import { Host } from "@expo/ui/swift-ui";
+import { Host as AndroidHost } from "@expo/ui/jetpack-compose";
+import { Host as IosHost } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 import { BibleReference } from "../types";
 
@@ -8,6 +9,8 @@ const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("BibleWidgetView");
 
 const MATCH_CONTENTS = { vertical: true, horizontal: false };
+
+const PlatformHost = Platform.OS === "ios" ? IosHost : AndroidHost;
 
 /**
  * An opinionated Bible passage display.
@@ -20,9 +23,12 @@ export function BibleWidgetView({
   ...props
 }: BibleWidgetViewProps) {
   return (
-    <Host matchContents={MATCH_CONTENTS} style={[styles.wrapper, style]}>
+    <PlatformHost
+      matchContents={MATCH_CONTENTS}
+      style={[style, styles.wrapper]}
+    >
       <NativeView {...(reference || {})} {...props} />
-    </Host>
+    </PlatformHost>
   );
 }
 

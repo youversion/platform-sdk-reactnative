@@ -1,6 +1,7 @@
-import { Host } from "@expo/ui/swift-ui";
+import { Host as AndroidHost } from "@expo/ui/jetpack-compose";
+import { Host as IosHost } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 import {
   BibleReference,
@@ -11,6 +12,9 @@ import {
 const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("BibleTextView");
 
+const PlatformHost = Platform.OS === "ios" ? IosHost : AndroidHost;
+
+const MATCH_CONTENTS = { vertical: true, horizontal: false };
 /**
  * A minimal text view for displaying a Bible passage.
  * The component supports font customizations and accepts an `onPress` handler
@@ -25,14 +29,17 @@ export function BibleTextView({
   ...props
 }: BibleTextViewProps) {
   return (
-    <Host style={[styles.wrapper, style]}>
+    <PlatformHost
+      style={[styles.wrapper, style]}
+      matchContents={MATCH_CONTENTS}
+    >
       <NativeView
         {...bibleReference}
         {...props}
         onTap={(e: NativeEvent) => onPress?.(e.nativeEvent)}
         style={styles.component}
       />
-    </Host>
+    </PlatformHost>
   );
 }
 
