@@ -1,7 +1,5 @@
 package com.youversion.reactnativesdk.views
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -86,25 +84,11 @@ fun textOptions(props: BibleTextViewProps): BibleTextOptions {
         fontFamily = FontFamily.Serif,
         fontSize = props.fontSize.value.sp,
         lineSpacing = props.lineSpacing.value?.sp ?: defaultTextOptions.lineSpacing,
-        textColor = composeColor(props.textColor.value),
-        wocColor = composeColor(props.wocColor.value) ?: composeColor(0xFFF04C59),
+        textColor = props.textColor.value,
+        wocColor = props.wocColor.value ?: composeColor(0xFFF04C59),
         renderVerseNumbers = props.renderVerseNumbers.value
             ?: defaultTextOptions.renderVerseNumbers,
         footnoteMode = footnodeMode(props)
-    )
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun composeColor(androidColor: Color?): Color? {
-    if (androidColor == null) {
-        return null
-    }
-
-    return Color(
-        alpha = androidColor.alpha,
-        red = androidColor.red,
-        green = androidColor.green,
-        blue = androidColor.blue
     )
 }
 
