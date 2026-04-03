@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
@@ -12,6 +13,7 @@ import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.ui.views.BibleText
 import com.youversion.platform.ui.views.BibleTextFootnoteMode
 import com.youversion.platform.ui.views.BibleTextOptions
+import com.youversion.reactnativesdk.api.VerseTappedEvent
 import expo.modules.kotlin.views.ComposeProps
 
 data class BibleTextViewProps(
@@ -35,10 +37,13 @@ data class BibleTextViewProps(
 val defaultTextOptions = BibleTextOptions()
 
 @Composable
-fun YVPBibleTextView(props: BibleTextViewProps, onTap: () -> Unit) {
+fun YVPBibleTextView(props: BibleTextViewProps, onTap: (event: VerseTappedEvent) -> Unit) {
     BibleText(
         reference = bibleReference(props),
-        textOptions = textOptions(props)
+        textOptions = textOptions(props),
+        onVerseTap = { reference: BibleReference, _: Offset  ->
+            onTap(VerseTappedEvent(reference))
+        }
     )
 }
 

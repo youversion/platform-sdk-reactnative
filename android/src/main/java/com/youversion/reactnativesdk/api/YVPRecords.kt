@@ -1,5 +1,6 @@
 package com.youversion.reactnativesdk.api
 
+import com.youversion.platform.core.bibles.domain.BibleReference
 import com.youversion.platform.core.bibles.models.BibleBook
 import com.youversion.platform.core.bibles.models.BibleChapter
 import com.youversion.platform.core.bibles.models.BibleVersion
@@ -58,6 +59,20 @@ data class LanguageRecord(
         countries = language.countries,
         textDirection = language.textDirection,
         defaultBibleId = language.defaultBibleVersionId
+    )
+}
+
+data class VerseTappedEvent(
+    @Field
+    val bibleReference: BibleReferenceRecord
+) : Record {
+    constructor(bibleReference: BibleReference) : this(
+        bibleReference = BibleReferenceRecord(
+            versionId = bibleReference.versionId,
+            bookUSFM = bibleReference.bookUSFM,
+            chapter = bibleReference.chapter,
+            verse = bibleReference.verseStart
+        )
     )
 }
 
@@ -155,6 +170,8 @@ data class BibleReferenceRecord(
     val bookUSFM: String,
     @Field
     val chapter: Int,
+    @Field
+    val verse: Int?
 ) : Record
 
 data class HighlightRecord(
