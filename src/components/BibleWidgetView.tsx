@@ -25,7 +25,7 @@ export function BibleWidgetView({
   return (
     <PlatformHost
       matchContents={MATCH_CONTENTS}
-      style={[style, styles.wrapper]}
+      style={[styles.wrapper, style]}
     >
       <NativeView {...(reference || {})} {...props} />
     </PlatformHost>

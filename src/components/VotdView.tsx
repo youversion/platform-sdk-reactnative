@@ -18,7 +18,7 @@ export function VotdView({
   return (
     <PlatformHost
       matchContents={MATCH_CONTENTS}
-      style={[style, styles.wrapper]}
+      style={[styles.wrapper, style]}
     >
       <NativeView bibleVersionId={bibleVersionId} {...props} />
     </PlatformHost>
