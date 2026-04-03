@@ -53,7 +53,7 @@ class YVPBibleTextView(context: Context, appContext: AppContext) :
         ) {
             Text(
                 text = "BibleTextView placeholder - versionId: ${props.versionId.value}, " +
-                        "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
+                       "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
                 color = Color.Gray
             )
         }
