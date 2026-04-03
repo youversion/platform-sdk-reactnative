@@ -19,13 +19,13 @@ data class VotdViewProps(
 fun YVPVotdView(props: VotdViewProps, onSharePress: () -> Unit, onFullChapterPress: () -> Unit) {
     if (props.isCompact.value == true) {
         CompactVerseOfTheDay(
-            bibleVersionId = props.bibleVersionId.value ?: 111,
+            bibleVersionId = props.bibleVersionId.value ?: 3034,
             dark = isDark(props),
             showIcon = isIconVisible(props)
         )
     } else {
         VerseOfTheDay(
-            bibleVersionId = props.bibleVersionId.value ?: 111,
+            bibleVersionId = props.bibleVersionId.value ?: 3034,
             dark = isDark(props),
             onShareClick = { onSharePress() },
             onFullChapterClick = { onFullChapterPress() },
