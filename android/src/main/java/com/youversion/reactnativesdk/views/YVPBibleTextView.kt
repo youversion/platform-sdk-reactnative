@@ -1,8 +1,6 @@
 package com.youversion.reactnativesdk.views
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -15,21 +13,21 @@ import com.youversion.reactnativesdk.api.VerseTappedEvent
 import expo.modules.kotlin.views.ComposeProps
 
 data class BibleTextViewProps(
-    val fontFamily: MutableState<String> = mutableStateOf("Times New Roman"),
-    val fontSize: MutableState<Float> = mutableStateOf(16f),
-    val lineSpacing: MutableState<Float?> = mutableStateOf(null),
-    val paragraphSpacing: MutableState<Float?> = mutableStateOf(null),
-    val textColor: MutableState<Color?> = mutableStateOf(null),
-    val wocColor: MutableState<Color?> = mutableStateOf(null),
-    val footnoteMode: MutableState<String?> = mutableStateOf(null),
-    val renderVerseNumbers: MutableState<Boolean?> = mutableStateOf(true),
+    val fontFamily: String = "Times New Roman",
+    val fontSize: Float = 16f,
+    val lineSpacing: Float? = null,
+    val paragraphSpacing: Float? = null,
+    val textColor: Color? = null,
+    val wocColor: Color? = null,
+    val footnoteMode: String? = null,
+    val renderVerseNumbers: Boolean? = true,
 
-    val versionId: MutableState<Int?> = mutableStateOf(null),
-    val bookUSFM: MutableState<String?> = mutableStateOf(null),
-    val chapter: MutableState<Int?> = mutableStateOf(null),
-    val verse: MutableState<Int?> = mutableStateOf(null),
-    val verseStart: MutableState<Int?> = mutableStateOf(null),
-    val verseEnd: MutableState<Int?> = mutableStateOf(null),
+    val versionId: Int? = null,
+    val bookUSFM: String? = null,
+    val chapter: Int? = null,
+    val verse: Int? = null,
+    val verseStart: Int? = null,
+    val verseEnd: Int? = null,
 ) : ComposeProps
 
 val defaultTextOptions = BibleTextOptions()
@@ -46,47 +44,47 @@ fun YVPBibleTextView(props: BibleTextViewProps, onTap: (event: VerseTappedEvent)
 }
 
 fun bibleReference(props: BibleTextViewProps): BibleReference {
-    if (props.chapter.value == null) {
+    if (props.chapter == null) {
         throw IllegalStateException("Chapter is required")
     }
 
-    if (props.bookUSFM.value == null) {
+    if (props.bookUSFM == null) {
         throw IllegalStateException("Book is required")
     }
 
-    if (props.versionId.value == null) {
+    if (props.versionId == null) {
         throw IllegalStateException("Version is required")
     }
 
-    val start = props.verseStart.value
-    val end = props.verseEnd.value
+    val start = props.verseStart
+    val end = props.verseEnd
 
     if (start != null && end != null) {
         return BibleReference(
-            versionId = props.versionId.value!!,
-            bookUSFM = props.bookUSFM.value!!,
-            chapter = props.chapter.value!!,
+            versionId = props.versionId,
+            bookUSFM = props.bookUSFM,
+            chapter = props.chapter,
             verseStart = start,
             verseEnd = end
         )
     }
 
     return BibleReference(
-        versionId = props.versionId.value!!,
-        bookUSFM = props.bookUSFM.value!!,
-        chapter = props.chapter.value!!,
-        verse = props.verse.value
+        versionId = props.versionId,
+        bookUSFM = props.bookUSFM,
+        chapter = props.chapter,
+        verse = props.verse
     )
 }
 
 fun textOptions(props: BibleTextViewProps): BibleTextOptions {
     return BibleTextOptions(
         fontFamily = FontFamily.Serif,
-        fontSize = props.fontSize.value.sp,
-        lineSpacing = props.lineSpacing.value?.sp ?: defaultTextOptions.lineSpacing,
-        textColor = props.textColor.value,
-        wocColor = props.wocColor.value ?: composeColor(0xFFF04C59),
-        renderVerseNumbers = props.renderVerseNumbers.value
+        fontSize = props.fontSize.sp,
+        lineSpacing = props.lineSpacing?.sp ?: defaultTextOptions.lineSpacing,
+        textColor = props.textColor,
+        wocColor = props.wocColor ?: composeColor(0xFFF04C59),
+        renderVerseNumbers = props.renderVerseNumbers
             ?: defaultTextOptions.renderVerseNumbers,
         footnoteMode = footnodeMode(props)
     )
@@ -97,7 +95,7 @@ fun composeColor(hexColor: Long): Color {
 }
 
 fun footnodeMode(props: BibleTextViewProps): BibleTextFootnoteMode {
-    return when (props.footnoteMode.value) {
+    return when (props.footnoteMode) {
         "none" -> BibleTextFootnoteMode.NONE
         "inline" -> BibleTextFootnoteMode.INLINE
         "marker" -> BibleTextFootnoteMode.MARKER

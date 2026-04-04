@@ -2,8 +2,6 @@ package com.youversion.reactnativesdk.views
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Shape
 import com.youversion.platform.ui.views.SignInWithYouVersionButton
 import com.youversion.platform.ui.views.SignInWithYouVersionButtonDefaults
@@ -11,10 +9,10 @@ import com.youversion.platform.ui.views.SignInWithYouVersionButtonMode
 import expo.modules.kotlin.views.ComposeProps
 
 data class SignInWithYouVersionButtonProps(
-    val mode: MutableState<String?> = mutableStateOf("full"),
-    val shape: MutableState<String?> = mutableStateOf("capsule"),
-    val isStroked: MutableState<Boolean?> = mutableStateOf(true),
-    val colorScheme: MutableState<String?> = mutableStateOf(null)
+    val mode: String? = "full",
+    val shape: String? = "capsule",
+    val isStroked: Boolean? = true,
+    val colorScheme: String? = null
 ) : ComposeProps
 
 
@@ -33,7 +31,7 @@ fun YVPSignInWithYouVersionButton(
 }
 
 fun mode(props: SignInWithYouVersionButtonProps): SignInWithYouVersionButtonMode {
-    return when (props.mode.value) {
+    return when (props.mode) {
         "full" -> SignInWithYouVersionButtonMode.FULL
         "compact" -> SignInWithYouVersionButtonMode.COMPACT
         "iconOnly" -> SignInWithYouVersionButtonMode.ICON_ONLY
@@ -42,12 +40,12 @@ fun mode(props: SignInWithYouVersionButtonProps): SignInWithYouVersionButtonMode
 }
 
 fun stroked(props: SignInWithYouVersionButtonProps): Boolean {
-    return props.isStroked.value ?: true
+    return props.isStroked ?: true
 }
 
 @Composable
 fun shape(props: SignInWithYouVersionButtonProps): Shape {
-    return when (props.shape.value) {
+    return when (props.shape) {
         "capsule" -> SignInWithYouVersionButtonDefaults.capsuleShape
         "rectangle" -> SignInWithYouVersionButtonDefaults.rectangleShape
         else -> SignInWithYouVersionButtonDefaults.capsuleShape
@@ -56,7 +54,7 @@ fun shape(props: SignInWithYouVersionButtonProps): Shape {
 
 @Composable
 fun isDark(props: SignInWithYouVersionButtonProps): Boolean {
-    return when (props.colorScheme.value) {
+    return when (props.colorScheme) {
         "dark" -> true
         "light" -> false
         else -> isSystemInDarkTheme()
