@@ -2,14 +2,20 @@ package com.youversion.reactnativesdk.api
 
 import android.content.Context
 import com.youversion.platform.core.api.YouVersionApi
-import com.youversion.platform.core.bibles.domain.BibleReference
-import com.youversion.platform.core.bibles.domain.BibleVersionRepository
 
 object YVPBibleApi {
     suspend fun versions(languageTag: String?): List<BibleVersionRecord> {
-        val response = YouVersionApi.bible.versions(languageTag)
-        val records = response.map { BibleVersionRecord(it) }
-        return records
+        val allResults = mutableListOf<BibleVersionRecord>()
+        var pageToken: String? = null
+
+        do {
+            val response = YouVersionApi.bible.versions(languageTag, pageToken = pageToken)
+            allResults.addAll(response.data.map { BibleVersionRecord(it) })
+
+            pageToken = response.nextPageToken
+        } while (pageToken != null)
+
+        return allResults
     }
 
     suspend fun version(versionId: Int): BibleVersionRecord {
@@ -18,15 +24,14 @@ object YVPBibleApi {
         return record
     }
 
-    suspend fun chapter(bibleReference: BibleReferenceRecord, context: Context): String {
-        val response = BibleVersionRepository(context).chapter(
-            reference = BibleReference(
-                versionId = bibleReference.versionId,
-                bookUSFM = bibleReference.bookUSFM,
-                chapter = bibleReference.chapter,
-            )
+    suspend fun chapter(bibleReference: BibleReferenceRecord): String {
+        val passageId = bibleReference.bookUSFM + "." + bibleReference.chapter.toString()
+
+        val response = YouVersionApi.bible.passage(
+            versionId = bibleReference.versionId,
+            passageId = passageId
         )
 
-        return response
+        return response.content
     }
 }

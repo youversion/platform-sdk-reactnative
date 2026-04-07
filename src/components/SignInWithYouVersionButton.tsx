@@ -1,7 +1,10 @@
-import { CommonViewModifierProps, Host } from "@expo/ui/swift-ui";
+import { Host as AndroidHost } from "@expo/ui/jetpack-compose";
+import { CommonViewModifierProps, Host as IosHost } from "@expo/ui/swift-ui";
 import { fixedSize } from "@expo/ui/swift-ui/modifiers";
 import { requireNativeView } from "expo";
-import { StyleProp, ViewStyle } from "react-native";
+import { Platform, StyleProp, ViewStyle } from "react-native";
+
+const PlatformHost = Platform.OS === "ios" ? IosHost : AndroidHost;
 
 const NativeView: React.ComponentType<NativeProps> = requireNativeView(
   "SignInWithYouVersionButton",
@@ -61,7 +64,7 @@ export function SignInWithYouVersionButton({
   ...props
 }: SignInWithYouVersionButtonProps) {
   return (
-    <Host matchContents={{ vertical: true, horizontal: true }} style={style}>
+    <PlatformHost matchContents style={style}>
       <NativeView
         {...props}
         mode={mode}
@@ -71,6 +74,6 @@ export function SignInWithYouVersionButton({
         onTap={onPress}
         modifiers={[fixedSize()]}
       />
-    </Host>
+    </PlatformHost>
   );
 }

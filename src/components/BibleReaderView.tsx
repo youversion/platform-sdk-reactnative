@@ -1,11 +1,14 @@
-import { Host } from "@expo/ui/swift-ui";
+import { Host as AndroidHost } from "@expo/ui/jetpack-compose";
+import { Host as IosHost } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import { BibleReference } from "../types";
 
 const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("BibleReaderView");
+
+const PlatformHost = Platform.OS === "ios" ? IosHost : AndroidHost;
 
 /**
  * A full-featured Bible reader component.
@@ -15,13 +18,13 @@ const NativeView: React.ComponentType<NativeProps> =
  */
 export function BibleReaderView({ reference, ...props }: BibleReaderViewProps) {
   return (
-    <Host style={styles.view}>
+    <PlatformHost style={styles.view}>
       <NativeView
         hasReference={!!reference}
         {...(reference || {})}
         {...props}
       />
-    </Host>
+    </PlatformHost>
   );
 }
 

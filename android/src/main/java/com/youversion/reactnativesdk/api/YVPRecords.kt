@@ -23,23 +23,23 @@ data class YouVersionVerseOfTheDayRecord(
 
 data class LanguageRecord(
     @Field
-    val id: String,
+    val id: String?,
     @Field
-    val language: String,
+    val language: String?,
     @Field
     val script: String?,
     @Field
     val scriptName: String?,
     @Field
-    val aliases: List<String>,
+    val aliases: List<String>?,
     @Field
-    val displayNames: Map<String, String>,
+    val displayNames: Map<String, String>?,
     @Field
-    val scripts: List<String>,
+    val scripts: List<String>?,
     @Field
-    val variants: List<String>,
+    val variants: List<String>?,
     @Field
-    val countries: List<String>,
+    val countries: List<String>?,
     @Field
     val textDirection: String,
     @Field

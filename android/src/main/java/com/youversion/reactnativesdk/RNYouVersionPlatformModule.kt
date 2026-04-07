@@ -57,12 +57,8 @@ class RNYouVersionPlatformModule : Module() {
         }
 
         AsyncFunction("chapter") Coroutine { bibleReference: BibleReferenceRecord ->
-            val context = appContext.reactContext
-                ?: throw IllegalStateException("ReactContext is not available yet")
-
             return@Coroutine YVPBibleApi.chapter(
-                bibleReference = bibleReference,
-                context = context
+                bibleReference = bibleReference
             )
         }
 
