@@ -1,50 +1,46 @@
 package com.youversion.reactnativesdk.views
 
-import android.content.Context
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.views.ComposableScope
+import com.youversion.platform.ui.views.votd.CompactVerseOfTheDay
+import com.youversion.platform.ui.views.votd.VerseOfTheDay
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.ExpoComposeView
 
 data class VotdViewProps(
-    val bibleVersionId: MutableState<Int?> = mutableStateOf(3034),
-    val colorScheme: MutableState<String?> = mutableStateOf(null),
+    val bibleVersionId: Int? = 3034,
+    val colorScheme: String? = null,
+    val showIcon: Boolean? = null,
+    val isCompact: Boolean? = null
 ) : ComposeProps
 
-class YVPVotdView(context: Context, appContext: AppContext) :
-    ExpoComposeView<VotdViewProps>(context, appContext, withHostingView = true) {
-
-    override val props = VotdViewProps()
-
-    @Composable
-    override fun ComposableScope.Content() {
-        val isDark = when (props.colorScheme.value) {
-            "dark" -> true
-            "light" -> false
-            else -> isSystemInDarkTheme()
-        }
-
-        // TODO: Replace with actual VerseOfTheDay composable when Kotlin SDK is ready
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "VotdView placeholder - versionId: ${props.bibleVersionId.value}",
-                color = if (isDark) Color.White else Color.DarkGray
-            )
-        }
+@Composable
+fun YVPVotdView(props: VotdViewProps, onSharePress: () -> Unit, onFullChapterPress: () -> Unit) {
+    if (props.isCompact == true) {
+        CompactVerseOfTheDay(
+            bibleVersionId = props.bibleVersionId ?: 3034,
+            dark = isDark(props),
+            showIcon = isIconVisible(props)
+        )
+    } else {
+        VerseOfTheDay(
+            bibleVersionId = props.bibleVersionId ?: 3034,
+            dark = isDark(props),
+            onShareClick = { onSharePress() },
+            onFullChapterClick = { onFullChapterPress() },
+            showIcon = isIconVisible(props)
+        )
     }
+}
+
+@Composable
+fun isDark(props: VotdViewProps): Boolean {
+    return when (props.colorScheme) {
+        "dark" -> true
+        "light" -> false
+        else -> isSystemInDarkTheme()
+    }
+}
+
+fun isIconVisible(props: VotdViewProps): Boolean {
+    return props.showIcon ?: true
 }

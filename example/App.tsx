@@ -2,6 +2,7 @@ import { createNativeBottomTabNavigator } from "@react-navigation/bottom-tabs/un
 import { NavigationContainer } from "@react-navigation/native";
 import { YouVersionPlatform } from "@youversion/platform-sdk-reactnative";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 
 import { ProfileScreen } from "./src/screens/ProfileScreen";
 import { ReaderScreen } from "./src/screens/ReaderScreen";
@@ -24,7 +25,13 @@ export default function App() {
           component={ReaderScreen}
           options={{
             tabBarLabel: "Bible",
-            tabBarIcon: { type: "sfSymbol", name: "book.closed.fill" },
+            tabBarIcon:
+              Platform.OS === "ios"
+                ? { type: "sfSymbol", name: "book.fill" }
+                : {
+                    type: "image",
+                    source: require("./assets/reader.png"),
+                  },
           }}
         />
         <Tabs.Screen
@@ -32,7 +39,13 @@ export default function App() {
           component={VotdScreen}
           options={{
             tabBarLabel: "VOTD",
-            tabBarIcon: { type: "sfSymbol", name: "sun.max.fill" },
+            tabBarIcon:
+              Platform.OS === "ios"
+                ? { type: "sfSymbol", name: "sun.max.fill" }
+                : {
+                    type: "image",
+                    source: require("./assets/votd.png"),
+                  },
           }}
         />
         <Tabs.Screen
@@ -40,7 +53,13 @@ export default function App() {
           component={WidgetScreen}
           options={{
             tabBarLabel: "Widget",
-            tabBarIcon: { type: "sfSymbol", name: "doc.plaintext.fill" },
+            tabBarIcon:
+              Platform.OS === "ios"
+                ? { type: "sfSymbol", name: "doc.plaintext.fill" }
+                : {
+                    type: "image",
+                    source: require("./assets/widget.png"),
+                  },
           }}
         />
         <Tabs.Screen
@@ -48,7 +67,13 @@ export default function App() {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
-            tabBarIcon: { type: "sfSymbol", name: "person.fill" },
+            tabBarIcon:
+              Platform.OS === "ios"
+                ? { type: "sfSymbol", name: "person.fill" }
+                : {
+                    type: "image",
+                    source: require("./assets/profile.png"),
+                  },
           }}
         />
       </Tabs.Navigator>

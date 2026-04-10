@@ -140,9 +140,9 @@ export type BibleReference =
 export interface OnBibleTextPressEvent {
   /** A reference to the Bible verse that was pressed */
   bibleReference: BibleReferenceVerse;
-  urlScheme: string;
+  urlScheme?: string;
   /** Not implemented yet */
-  footnotes: unknown[];
+  footnotes?: unknown[];
 }
 
 export interface LanguageOverview {

@@ -1,6 +1,9 @@
-import { Host } from "@expo/ui/swift-ui";
+import { Host as AndroidHost } from "@expo/ui/jetpack-compose";
+import { Host as IosHost } from "@expo/ui/swift-ui";
 import { requireNativeView } from "expo";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
+
+const PlatformHost = Platform.OS === "ios" ? IosHost : AndroidHost;
 
 const NativeView: React.ComponentType<NativeProps> =
   requireNativeView("VotdView");
@@ -13,9 +16,12 @@ export function VotdView({
   ...props
 }: VotdViewProps) {
   return (
-    <Host matchContents={MATCH_CONTENTS} style={[styles.wrapper, style]}>
+    <PlatformHost
+      matchContents={MATCH_CONTENTS}
+      style={[styles.wrapper, style]}
+    >
       <NativeView bibleVersionId={bibleVersionId} {...props} />
-    </Host>
+    </PlatformHost>
   );
 }
 

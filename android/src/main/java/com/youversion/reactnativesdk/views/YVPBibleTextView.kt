@@ -1,61 +1,106 @@
 package com.youversion.reactnativesdk.views
 
-import android.content.Context
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import expo.modules.kotlin.AppContext
-import expo.modules.kotlin.viewevent.EventDispatcher
-import expo.modules.kotlin.views.ComposableScope
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.sp
+import com.youversion.platform.core.bibles.domain.BibleReference
+import com.youversion.platform.ui.views.BibleText
+import com.youversion.platform.ui.views.BibleTextFootnoteMode
+import com.youversion.platform.ui.views.BibleTextOptions
+import com.youversion.reactnativesdk.api.VerseTappedEvent
 import expo.modules.kotlin.views.ComposeProps
-import expo.modules.kotlin.views.ExpoComposeView
 
 data class BibleTextViewProps(
-    // Styling
-    val fontFamily: MutableState<String?> = mutableStateOf(null),
-    val fontSize: MutableState<Float?> = mutableStateOf(16f),
-    val lineSpacing: MutableState<Float?> = mutableStateOf(null),
-    val paragraphSpacing: MutableState<Float?> = mutableStateOf(null),
-    val textColor: MutableState<Int?> = mutableStateOf(null),
-    val wocColor: MutableState<Int?> = mutableStateOf(null),
-    val footnoteMode: MutableState<String?> = mutableStateOf("none"),
-    val renderVerseNumbers: MutableState<Boolean?> = mutableStateOf(true),
+    val fontFamily: String = "Times New Roman",
+    val fontSize: Float = 16f,
+    val lineSpacing: Float? = null,
+    val paragraphSpacing: Float? = null,
+    val textColor: Color? = null,
+    val wocColor: Color? = null,
+    val footnoteMode: String? = null,
+    val renderVerseNumbers: Boolean? = true,
 
-    // Bible reference
-    val versionId: MutableState<Int?> = mutableStateOf(null),
-    val bookUSFM: MutableState<String?> = mutableStateOf(null),
-    val chapter: MutableState<Int?> = mutableStateOf(null),
-    val verse: MutableState<Int?> = mutableStateOf(null),
-    val verseStart: MutableState<Int?> = mutableStateOf(null),
-    val verseEnd: MutableState<Int?> = mutableStateOf(null),
+    val versionId: Int? = null,
+    val bookUSFM: String? = null,
+    val chapter: Int? = null,
+    val verse: Int? = null,
+    val verseStart: Int? = null,
+    val verseEnd: Int? = null,
 ) : ComposeProps
 
-class YVPBibleTextView(context: Context, appContext: AppContext) :
-    ExpoComposeView<BibleTextViewProps>(context, appContext, withHostingView = true) {
+val defaultTextOptions = BibleTextOptions()
 
-    override val props = BibleTextViewProps()
-    private val onTap by EventDispatcher()
-
-    @Composable
-    override fun ComposableScope.Content() {
-        // TODO: Replace with actual BibleText composable when Kotlin SDK is ready
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "BibleTextView placeholder - versionId: ${props.versionId.value}, " +
-                       "book: ${props.bookUSFM.value}, chapter: ${props.chapter.value}",
-                color = Color.Gray
-            )
+@Composable
+fun YVPBibleTextView(props: BibleTextViewProps, onTap: (event: VerseTappedEvent) -> Unit) {
+    BibleText(
+        reference = bibleReference(props),
+        textOptions = textOptions(props),
+        onVerseTap = { reference: BibleReference, _: Offset  ->
+            onTap(VerseTappedEvent(reference))
         }
+    )
+}
+
+fun bibleReference(props: BibleTextViewProps): BibleReference {
+    if (props.chapter == null) {
+        throw IllegalStateException("Chapter is required")
+    }
+
+    if (props.bookUSFM == null) {
+        throw IllegalStateException("Book is required")
+    }
+
+    if (props.versionId == null) {
+        throw IllegalStateException("Version is required")
+    }
+
+    val start = props.verseStart
+    val end = props.verseEnd
+
+    if (start != null && end != null) {
+        return BibleReference(
+            versionId = props.versionId,
+            bookUSFM = props.bookUSFM,
+            chapter = props.chapter,
+            verseStart = start,
+            verseEnd = end
+        )
+    }
+
+    return BibleReference(
+        versionId = props.versionId,
+        bookUSFM = props.bookUSFM,
+        chapter = props.chapter,
+        verse = props.verse
+    )
+}
+
+fun textOptions(props: BibleTextViewProps): BibleTextOptions {
+    return BibleTextOptions(
+        fontFamily = FontFamily.Serif,
+        fontSize = props.fontSize.sp,
+        lineSpacing = props.lineSpacing?.sp ?: defaultTextOptions.lineSpacing,
+        textColor = props.textColor,
+        wocColor = props.wocColor ?: composeColor(0xFFF04C59),
+        renderVerseNumbers = props.renderVerseNumbers
+            ?: defaultTextOptions.renderVerseNumbers,
+        footnoteMode = footnodeMode(props)
+    )
+}
+
+fun composeColor(hexColor: Long): Color {
+    return Color(hexColor)
+}
+
+fun footnodeMode(props: BibleTextViewProps): BibleTextFootnoteMode {
+    return when (props.footnoteMode) {
+        "none" -> BibleTextFootnoteMode.NONE
+        "inline" -> BibleTextFootnoteMode.INLINE
+        "marker" -> BibleTextFootnoteMode.MARKER
+        "letters" -> BibleTextFootnoteMode.LETTERS
+        "image" -> BibleTextFootnoteMode.IMAGE
+        else -> defaultTextOptions.footnoteMode
     }
 }
