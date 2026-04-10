@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.0 (2026-04-10)
+
+* feat: Implement all Compose views (#42) ([526a207](https://github.com/youversion/platform-sdk-reactnative/commit/526a207)), closes [#42](https://github.com/youversion/platform-sdk-reactnative/issues/42)
+* chore: Upgrade Kotlin side to match YouVersion Kotlin SDK 1.0.1 (#41) ([8d79858](https://github.com/youversion/platform-sdk-reactnative/commit/8d79858)), closes [#41](https://github.com/youversion/platform-sdk-reactnative/issues/41)
+* chore: Upgrade to Expo SDK 55 (#40) ([ca5e59b](https://github.com/youversion/platform-sdk-reactnative/commit/ca5e59b)), closes [#40](https://github.com/youversion/platform-sdk-reactnative/issues/40)
+
 ## 0.10.0 (2026-02-27)
 
 * feat: implement Bible reader view for Android (#39) ([681b51b](https://github.com/youversion/platform-sdk-reactnative/commit/681b51b)), closes [#39](https://github.com/youversion/platform-sdk-reactnative/issues/39)
