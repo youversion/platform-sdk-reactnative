@@ -60,7 +60,7 @@ dependencies {
   implementation 'androidx.compose.foundation:foundation-android:1.9.1'
   implementation 'androidx.compose.material3:material3-android:1.3.2'
 
-  implementation 'com.youversion.platform:platform-core:1.0.1'
-  implementation 'com.youversion.platform:platform-ui:1.0.1'
-  implementation 'com.youversion.platform:platform-reader:1.0.1'
+  implementation 'com.youversion.platform:platform-core:1.1.1'
+  implementation 'com.youversion.platform:platform-ui:1.1.1'
+  implementation 'com.youversion.platform:platform-reader:1.1.1'
 }
