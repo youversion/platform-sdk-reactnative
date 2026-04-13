@@ -1,35 +1,30 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { DynamicColorIOS } from 'react-native'
+import { NativeTabs, Icon, Label } from 'expo-router/unstable-native-tabs'
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+    <NativeTabs
+      labelStyle={{
+        // For the text color
+        color: DynamicColorIOS({
+          dark: 'white',
+          light: 'black',
+        }),
+      }}
+      // For the selected icon color
+      tintColor={DynamicColorIOS({
+        dark: 'white',
+        light: 'black',
+      })}
+    >
+      <NativeTabs.Trigger name="index">
+        <Label>Home</Label>
+        <Icon sf="house.fill" drawable="custom_android_drawable" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="explore">
+        <Label>Explore</Label>
+        <Icon sf="gear" drawable="custom_settings_drawable" />
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  )
 }
