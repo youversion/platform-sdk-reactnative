@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.11.1 (2026-04-13)</small>
+
+* fix(android): downgrade kotlin to 2.2.21 and upgrade Android SDK (#43) ([3c827d9](https://github.com/youversion/platform-sdk-reactnative/commit/3c827d9)), closes [#43](https://github.com/youversion/platform-sdk-reactnative/issues/43)
+
 ## 0.11.0 (2026-04-10)
 
 * feat: Implement all Compose views (#42) ([526a207](https://github.com/youversion/platform-sdk-reactnative/commit/526a207)), closes [#42](https://github.com/youversion/platform-sdk-reactnative/issues/42)
