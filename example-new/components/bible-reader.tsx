@@ -1,15 +1,6 @@
 'use dom'
 
-import { Platform } from 'react-native'
 import { YouVersionProvider, BibleReader } from '@youversion/platform-react-ui'
-import * as Crypto from 'expo-crypto'
-
-type UUID = `${string}-${string}-${string}-${string}-${string}`
-
-// We need to monkey patch this since the window object doesn't exist, but the YouVersionProvider relies on it.
-if (Platform.OS !== 'web') {
-  window.crypto.randomUUID = () => Crypto.randomUUID() as UUID
-}
 
 export default function App() {
   return (
